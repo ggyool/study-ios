@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TD7-ev-UH3">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SingletonPatternExam" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ltd-zh-0aT">
+                                <rect key="frame" x="20" y="158" width="374" height="78"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="이름을 입력하세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hIW-gr-hU9">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="나이를 입력하세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Qh-83-Zur">
+                                        <rect key="frame" x="0.0" y="44" width="374" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hOT-7B-IDY">
+                                <rect key="frame" x="20" y="108" width="35" height="30"/>
+                                <state key="normal" title="Push"/>
+                                <connections>
+                                    <segue destination="w1O-Ph-Ng7" kind="show" id="ucz-yx-N1N"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SDE-62-C2z">
+                                <rect key="frame" x="188" y="108" width="206" height="30"/>
+                                <state key="normal" title="Set data to Singleton Instance"/>
+                                <connections>
+                                    <action selector="touchUpSetButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z0Q-DR-5iM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="hOT-7B-IDY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="0jt-9S-qc6"/>
+                            <constraint firstItem="ltd-zh-0aT" firstAttribute="top" secondItem="hOT-7B-IDY" secondAttribute="bottom" constant="20" id="ETJ-mu-MfC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SDE-62-C2z" secondAttribute="trailing" constant="20" id="Tpq-E5-6BC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ltd-zh-0aT" secondAttribute="trailing" constant="20" id="UaX-AK-sNJ"/>
+                            <constraint firstItem="ltd-zh-0aT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="YKe-l5-jLc"/>
+                            <constraint firstItem="hOT-7B-IDY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="ieD-uP-sc8"/>
+                            <constraint firstItem="SDE-62-C2z" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="xeI-xv-rMa"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="IaS-6U-stL"/>
+                    <connections>
+                        <outlet property="ageField" destination="4Qh-83-Zur" id="dwZ-7B-PrF"/>
+                        <outlet property="nameField" destination="hIW-gr-hU9" id="cTH-5T-u60"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1047.8260869565217" y="137.94642857142856"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="M7i-kK-kn2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TD7-ev-UH3" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vyJ-b0-nzA">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="b9O-of-ICX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tmg-Zy-5Kb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
+        </scene>
+        <!--Second View Controller-->
+        <scene sceneID="TkR-Hs-S1a">
+            <objects>
+                <viewController id="w1O-Ph-Ng7" customClass="SecondViewController" customModule="SingletonPatternExam" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zX1-Wg-BAd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GNO-cY-Pab">
+                                <rect key="frame" x="20" y="108" width="30" height="30"/>
+                                <state key="normal" title="Pop"/>
+                                <connections>
+                                    <action selector="popToPrev" destination="w1O-Ph-Ng7" eventType="touchUpInside" id="Eyv-Ia-yUs"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="r9g-yp-2n2">
+                                <rect key="frame" x="20" y="158" width="374" height="66"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfq-ek-vph">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60z-t6-jdZ">
+                                        <rect key="frame" x="0.0" y="45.5" width="374" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="fbp-8k-MLK" firstAttribute="trailing" secondItem="r9g-yp-2n2" secondAttribute="trailing" constant="20" id="9x1-CH-EvP"/>
+                            <constraint firstItem="r9g-yp-2n2" firstAttribute="top" secondItem="GNO-cY-Pab" secondAttribute="bottom" constant="20" id="AWo-zn-axK"/>
+                            <constraint firstItem="GNO-cY-Pab" firstAttribute="top" secondItem="fbp-8k-MLK" secondAttribute="top" constant="20" id="Imj-bp-PVO"/>
+                            <constraint firstItem="GNO-cY-Pab" firstAttribute="leading" secondItem="fbp-8k-MLK" secondAttribute="leading" constant="20" id="bTC-G0-u0V"/>
+                            <constraint firstItem="r9g-yp-2n2" firstAttribute="leading" secondItem="fbp-8k-MLK" secondAttribute="leading" constant="20" id="oW2-P1-wbn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="fbp-8k-MLK"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="JFk-zb-ASP"/>
+                    <connections>
+                        <outlet property="ageLabel" destination="60z-t6-jdZ" id="cMZ-I0-dNL"/>
+                        <outlet property="nameLabel" destination="rfq-ek-vph" id="ZzJ-i2-v9W"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cHE-8O-Lcs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1897" y="138"/>
+        </scene>
+    </scenes>
+</document>
