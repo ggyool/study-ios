@@ -16,6 +16,7 @@
 		57EA475824E9AA1D0046DE28 /* BasicInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EA475724E9AA1D0046DE28 /* BasicInfoViewController.swift */; };
 		57EA475A24E9B04B0046DE28 /* DetailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EA475924E9B04B0046DE28 /* DetailInfoViewController.swift */; };
 		57EA475C24E9B05C0046DE28 /* UserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EA475B24E9B05B0046DE28 /* UserInformation.swift */; };
+		57FFD7F124EAF5C800B4E2F6 /* UserInformationDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FFD7F024EAF5C800B4E2F6 /* UserInformationDto.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		57EA475724E9AA1D0046DE28 /* BasicInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInfoViewController.swift; sourceTree = "<group>"; };
 		57EA475924E9B04B0046DE28 /* DetailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoViewController.swift; sourceTree = "<group>"; };
 		57EA475B24E9B05B0046DE28 /* UserInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformation.swift; sourceTree = "<group>"; };
+		57FFD7F024EAF5C800B4E2F6 /* UserInformationDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationDto.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				57EA475724E9AA1D0046DE28 /* BasicInfoViewController.swift */,
 				57EA475924E9B04B0046DE28 /* DetailInfoViewController.swift */,
 				57EA475B24E9B05B0046DE28 /* UserInformation.swift */,
+				57FFD7F024EAF5C800B4E2F6 /* UserInformationDto.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 				57EA474824E92F630046DE28 /* ViewController.swift in Sources */,
 				57EA475C24E9B05C0046DE28 /* UserInformation.swift in Sources */,
 				57EA475824E9AA1D0046DE28 /* BasicInfoViewController.swift in Sources */,
+				57FFD7F124EAF5C800B4E2F6 /* UserInformationDto.swift in Sources */,
 				57EA474424E92F630046DE28 /* AppDelegate.swift in Sources */,
 				57EA474624E92F630046DE28 /* SceneDelegate.swift in Sources */,
 				57EA475A24E9B04B0046DE28 /* DetailInfoViewController.swift in Sources */,

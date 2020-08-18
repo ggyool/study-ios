@@ -10,9 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var idLabel: UITextField!
-    @IBOutlet weak var pwLabel: UITextField!
-    
+    @IBOutlet weak var idTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     
@@ -21,6 +20,12 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if !UserInformation.isEmpty(){
+            idTextField.text = UserInformation.getId()
+        }
+        passwordTextField.text?.removeAll()        
+    }
 }
 
