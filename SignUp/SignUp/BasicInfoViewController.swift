@@ -8,8 +8,9 @@
 
 import UIKit
 
-class BasicInfoViewController: UIViewController, UIImagePickerControllerDelegate , UINavigationControllerDelegate,
-UIGestureRecognizerDelegate, UITextViewDelegate{
+class BasicInfoViewController:UIViewController,
+    UIImagePickerControllerDelegate ,UINavigationControllerDelegate,
+    UIGestureRecognizerDelegate, UITextViewDelegate{
 
     lazy var imagePicker: UIImagePickerController = {
         let picker = UIImagePickerController()
@@ -28,6 +29,13 @@ UIGestureRecognizerDelegate, UITextViewDelegate{
     @IBOutlet weak var checkPasswordTextField: UITextField!
     @IBOutlet weak var introductionTextView: UITextView!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initMember()
+        addGesture()
+        addAction()
+    }
+    
     func initMember(){
         nextButton.isEnabled = false
         userDto = UserInformationDto()
@@ -43,10 +51,6 @@ UIGestureRecognizerDelegate, UITextViewDelegate{
     func presentImagePicker(){
         self.present(imagePicker, animated: true, completion: nil)
     }
-    // image picker 에서 취소를 눌렀을 때
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        self.dismiss(animated: true, completion: nil)
-    }
     // image picker 에서 사진을 선택했을 때
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image: UIImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
@@ -56,13 +60,13 @@ UIGestureRecognizerDelegate, UITextViewDelegate{
         }
         self.dismiss(animated: true, completion: nil)
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        addGesture()
-        addAction()
-        initMember()
+    // image picker 에서 취소를 눌렀을 때
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
     }
+    
+    
+    
     
     // image view에 gesture 추가하기
     func addGesture(){
