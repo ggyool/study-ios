@@ -65,9 +65,6 @@ class BasicInfoViewController:UIViewController,
         self.dismiss(animated: true, completion: nil)
     }
     
-    
-    
-    
     // image view에 gesture 추가하기
     func addGesture(){
         let tapGesture = UITapGestureRecognizer()
@@ -75,11 +72,17 @@ class BasicInfoViewController:UIViewController,
         self.imageView.addGestureRecognizer(tapGesture)
     }
     
-    // image view tap 했을 때 할 동작
+    // image view tap 했을시 동작
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         presentImagePicker()
         return true
     }
+    
+    // view 를 tap 했을시 동작
+    @IBAction func touchView(_ sender: Any) {
+        self.view.endEditing(true)
+    }
+    
     
     func addAction(){
         idTextField.addTarget(self, action: #selector(editText(_:)), for: UIControl.Event.editingChanged)
@@ -146,5 +149,21 @@ class BasicInfoViewController:UIViewController,
             destination.userDto = userDto
         }
     }
-    
 }
+
+//
+//class ActionForTapView: UIViewController, UIGestureRecognizerDelegate{
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//    }
+//    func setGesture(imageView: UIImageView){
+//        print("modi imageView:", imageView)
+//        let tapGesture = UITapGestureRecognizer()
+//        tapGesture.delegate = self
+//        imageView.addGestureRecognizer(tapGesture)
+//    }
+//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+//        print("!!!!!!")
+//        return true
+//    }
+//}

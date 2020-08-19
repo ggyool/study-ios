@@ -26,5 +26,8 @@ class ViewController: UIViewController {
         }
         passwordTextField.text?.removeAll()        
     }
+    @IBAction func touchView(_ sender: Any) {
+        self.view.endEditing(true)
+    }
 }
 

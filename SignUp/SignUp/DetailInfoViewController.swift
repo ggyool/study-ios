@@ -34,6 +34,9 @@ class DetailInfoViewController: UIViewController {
         joinButton.isEnabled = false
     }
     
+    @IBAction func touchView(_ sender: Any) {
+        self.view.endEditing(true)
+    }
     @IBAction func touchCancelButton(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
