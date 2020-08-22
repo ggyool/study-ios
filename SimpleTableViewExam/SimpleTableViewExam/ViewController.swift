@@ -53,9 +53,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section<2{
+            // 재사용 하지 않을 수도 있지만 낭비
+            // let cell: UITableViewCell = UITableViewCell()
             let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
             let text: String = indexPath.section == 0 ? korean[indexPath.row] : english[indexPath.row]
             cell.textLabel?.text = text
+            // 2번째 행만 빨강색으로 바꾸고 싶으면
+            // 아닌 것들은 흰색으로 바꿔야 한다. (셀이 재사용 되기 때문에)
+            if indexPath.row == 1{
+                cell.backgroundColor = UIColor.red
+            }
+            else{
+                cell.backgroundColor = UIColor.white
+            }
             return cell
         }
         
@@ -87,5 +97,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // self.tableView.reloadData()
         self.tableView.reloadSections(IndexSet(2...2), with:UITableView.RowAnimation.automatic)
     }
+    
+    
+    // 세그를 통해 데이터 전달
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // segue가 여러개이면 indentifier 나 타입으로 구분해서 사용해야한다.
+        guard let nextViewController: SecondViewController =
+            segue.destination as? SecondViewController else {
+            return
+        }
+        guard let cell: UITableViewCell = sender as? UITableViewCell else {
+            return
+        }
+        nextViewController.textToSet = cell.textLabel?.text
+    }
+    
 }
 
