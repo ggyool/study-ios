@@ -34,13 +34,11 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ListSegue" {
-            guard let nextViewController = segue.destination as? ListViewController,
-                let tableViewCell = sender as? CustomTableViewCell_RootView else {
-                return
-            }
-            nextViewController.nationType = tableViewCell.nationType
+        guard let nextViewController = segue.destination as? ListViewController,
+            let tableViewCell = sender as? CustomTableViewCell_RootView else {
+            return
         }
+        nextViewController.nationType = tableViewCell.nationType
     }
 
 }

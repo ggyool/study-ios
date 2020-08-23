@@ -9,15 +9,16 @@
 import Foundation
 import UIKit
 
-struct Weather: Codable {
+class Weather: Codable {
     
     let cityName: String
-    let state: WeatherType
+    let weatherType: WeatherType
     let celsius: Double
     let rainfallProbability: Int
     
     enum CodingKeys: String, CodingKey {
-        case state, celsius
+        case celsius
+        case weatherType = "state"
         case cityName = "city_name"
         case rainfallProbability = "rainfall_probability"
     }
@@ -28,7 +29,7 @@ struct Weather: Codable {
         return (fahrenheit*10).rounded()/10
     }
     var iconImage: UIImage? {
-        return UIImage(named: state.getImageName())
+        return UIImage(named: weatherType.getImageName())
     }
     var temperatureText: String {
         return  "섭씨 \(celsius)도 / 화씨 \(fahrenheit)도"

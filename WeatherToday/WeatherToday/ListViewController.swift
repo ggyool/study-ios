@@ -17,15 +17,14 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        addScreenSettings()
+        addNavagationSettings()
         loadData()
     }
     
-    func addScreenSettings(){
+    func addNavagationSettings(){
         // icon image 아래 separator 가 안생겨서 storyboard tableView 설정에서 custom 으로 넣었음
         // tableView.separatorInset = UIEdgeInsets.zero
         navigationItem.backBarButtonItem?.title = "세계 날씨"
-        navigationItem.backBarButtonItem?.tintColor = UIColor.white
         navigationItem.title = nationType?.toKorean()
     }
     
@@ -67,21 +66,24 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         } else {
             cell.rainfallLabel.textColor = UIColor.black
         }
+        // prepare에서 사용하기 위해
+        cell.weather = weather
         cell.iconImageView.image = weather.iconImage
         cell.cityNameLabel.text = weather.cityName
         cell.temperatureLabel.text = weather.temperatureText
         cell.rainfallLabel.text = weather.rainfallText
         return cell
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+        
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        guard let nextViewController = segue.destination as? DetailViewController,
+            let tableViewCell = sender as? CustomTableViewCell_ListView else {
+            return
+        }
+        nextViewController.weather = tableViewCell.weather
     }
-    */
+    
+    
+    
 
 }
