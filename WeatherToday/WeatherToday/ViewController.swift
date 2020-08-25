@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource {
     
-    let nationTypess: [NationType] = [.kr, .de, .it, .us, .fr, .jp]
+    let nationTypes: [NationType] = [.kr, .de, .it, .us, .fr, .jp]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,11 +18,11 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return nationTypess.count
+        return nationTypes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let nationType = nationTypess[indexPath.row]
+        let nationType = nationTypes[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             as? CustomTableViewCell_RootView else {
             preconditionFailure("cell 불러오기 실패")

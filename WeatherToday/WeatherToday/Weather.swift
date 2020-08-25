@@ -37,4 +37,6 @@ class Weather: Codable {
     var rainfallText: String {
         return "강수확률 \(rainfallProbability)%"
     }
+    
 }
+

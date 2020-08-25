@@ -10,7 +10,6 @@ import UIKit
 
 class CustomTableViewCell_ListView: UITableViewCell {
 
-    
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var cityNameLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!

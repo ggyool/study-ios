@@ -10,7 +10,6 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
-    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var weatherTypeLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!

@@ -39,7 +39,6 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         } catch {
             print(error.localizedDescription)
         }
-        self.tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
