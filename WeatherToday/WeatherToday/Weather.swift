@@ -22,7 +22,7 @@ struct Weather: Codable {
         case cityName = "city_name"
         case rainfallProbability = "rainfall_probability"
     }
-    // test
+    
     var fahrenheit: Double {
         let fahrenheit: Double = celsius * 9 / 5 + 32
         // 소수 2번째 자리에서 반올림
