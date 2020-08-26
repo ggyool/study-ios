@@ -15,7 +15,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var rainfallLabel: UILabel!
     
-    weak var weather: Weather?
+    var weather: Weather?
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -13,7 +13,6 @@ class CustomTableViewCell_RootView: UITableViewCell {
     
     @IBOutlet weak var flagImageView: UIImageView!
     @IBOutlet weak var nationLabel: UILabel!
-    var nationType: NationType?
     
     override func awakeFromNib() {
         super.awakeFromNib()

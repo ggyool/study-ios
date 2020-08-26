@@ -12,7 +12,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var tableView: UITableView!
     
-    var nationType: NationType?
+    var nation: Nation?
     var weathers: [Weather] = []
 
     override func viewDidLoad() {
@@ -25,13 +25,13 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // icon image 아래 separator 가 안생겨서 storyboard tableView 설정에서 custom 으로 넣었음
         // tableView.separatorInset = UIEdgeInsets.zero
         navigationItem.backBarButtonItem?.title = "세계 날씨"
-        navigationItem.title = nationType?.toKorean()
+        navigationItem.title = nation?.koreanName
     }
     
     func loadData(){
         let jsonDecoder = JSONDecoder()
-        guard let nationType = self.nationType,
-            let dataAsset = NSDataAsset(name: nationType.rawValue) else {
+        guard let nation = self.nation,
+            let dataAsset = NSDataAsset(name: nation.name) else {
             return
         }
         do{
@@ -65,8 +65,6 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         } else {
             cell.rainfallLabel.textColor = UIColor.black
         }
-        // prepare에서 사용하기 위해
-        cell.weather = weather
         cell.iconImageView.image = weather.iconImage
         cell.cityNameLabel.text = weather.cityName
         cell.temperatureLabel.text = weather.temperatureText
@@ -76,10 +74,10 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let nextViewController = segue.destination as? DetailViewController,
-            let tableViewCell = sender as? CustomTableViewCell_ListView else {
+            let indexPath = tableView.indexPathForSelectedRow else {
             return
         }
-        nextViewController.weather = tableViewCell.weather
+        nextViewController.weather = weathers[indexPath.row]
     }
     
     

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Weather: Codable {
+struct Weather: Codable {
     
     let cityName: String
     let weatherType: WeatherType

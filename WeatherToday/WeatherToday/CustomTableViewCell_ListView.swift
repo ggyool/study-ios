@@ -14,7 +14,6 @@ class CustomTableViewCell_ListView: UITableViewCell {
     @IBOutlet weak var cityNameLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var rainfallLabel: UILabel!
-    weak var weather: Weather?
     
     override func awakeFromNib() {
         super.awakeFromNib()
