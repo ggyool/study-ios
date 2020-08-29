@@ -23,10 +23,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cameraRoll: PHFetchResult<PHAssetCollection> =
             PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: nil)
         
-        // firstObject 의미는
+        // firstObject - 모든 사진을 저장한 컬렉션
         guard let cameraRollCollection = cameraRoll.firstObject else {
             return
         }
+        // print(cameraRollCollection.localizedTitle!)
         
         
         let fetchOptions = PHFetchOptions()
@@ -122,10 +123,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         fetchResult = changes.fetchResultAfterChanges
         
+        // 이 위치에서 메인 쓰레드에 넣어야 하는 이유는
         OperationQueue.main.addOperation {
             self.tableView.reloadSections(IndexSet(0...0), with: .automatic)
         }
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let nextViewController: ImageZoomViewController = segue.destination as? ImageZoomViewController,
+            let cell: UITableViewCell = sender as? UITableViewCell,
+            let index: IndexPath = self.tableView.indexPath(for: cell) else {
+            return
+        }
+        nextViewController.asset = self.fetchResult[index.row]
+    }
+    
+    @IBAction func touchUpRefreshButton(_ sender: UIBarButtonItem) {
+        self.tableView.reloadSections(IndexSet(0...0), with: .automatic)
+    }
+    
     
 }
 
