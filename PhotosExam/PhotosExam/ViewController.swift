@@ -17,8 +17,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var fetchResult: PHFetchResult<PHAsset>!
     let imageManager: PHCachingImageManager = PHCachingImageManager()
     
-    
-    
+
     func requestCollection(){
         let cameraRoll: PHFetchResult<PHAssetCollection> =
             PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: nil)

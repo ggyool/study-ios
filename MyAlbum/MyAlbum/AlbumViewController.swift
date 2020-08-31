@@ -6,22 +6,45 @@
 //  Copyright © 2020 ggyool. All rights reserved.
 //
 
+                // header 추가해야함
+
 import UIKit
 import Photos
 
 class AlbumViewController: UIViewController, UICollectionViewDataSource {
     
+
+    @IBOutlet weak var collectionView: UICollectionView!
     
     let cellIdentifier:String = "cell"
-    
-    var thumbnailResult: PHFetchResult<PHCollection>!
+    // 모든 썸네일 이미지를 한번에 저장 하는건 부담스럽고, 에셋콜렉션 저장하는건 괜찮을까, 넘겨줄때도 편할것같은데
+    var collections: [PHAssetCollection] = []
     var imageManager: PHCachingImageManager = PHCachingImageManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        initCollectionView()
         if(authorizePhotoLibrary()){
             requestCollection()
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        if(authorizePhotoLibrary()){
+            requestCollection()
+        }
+    }
+    
+    func initCollectionView() {
+        let criteria: CGFloat = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+        let distance: CGFloat = criteria/30
+        let flowLayout: UICollectionViewFlowLayout =  UICollectionViewFlowLayout()
+        flowLayout.sectionInset = UIEdgeInsets(top: distance, left: distance, bottom: distance, right: distance)
+        flowLayout.minimumInteritemSpacing = distance // 최소 item 간 거리
+        flowLayout.minimumLineSpacing = distance // 줄 간의 최소 거리
+        flowLayout.itemSize = CGSize(width: (criteria-3*distance)/2, height: criteria/2+3*distance)
+        collectionView.collectionViewLayout = flowLayout
     }
     
     func authorizePhotoLibrary() -> Bool {
@@ -48,39 +71,71 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource {
             PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumFavorites, options: nil)
         let albumResult: PHFetchResult<PHAssetCollection> =
             PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
-        
-        guard let cameraRoll: PHAssetCollection = cameraRollResult.firstObject,
-            let favorites: PHAssetCollection = favoriteResult.firstObject else {
-                return
+        if let cameraRoll: PHAssetCollection = cameraRollResult.firstObject {
+            self.collections.append(cameraRoll)
         }
-        
-        
-        // 한개만 가져올 수는 좋은 방법은 없는지
-        let fetchOptions = PHFetchOptions()
-        // fetchOptions.fetchLimit = 1
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        print(PHAsset.fetchAssets(in: cameraRoll, options: fetchOptions))
-        
-        
-
-        
-        
-//        
-//        for i in 0..<userAlbums.count {
-//            if let res: PHAssetCollection? = userAlbums.object(at: i) {
-//                print(res)
-//            }
-//        }
-        
-        print("end")
+        if let favorite: PHAssetCollection = favoriteResult.firstObject {
+            self.collections.append(favorite)
+        }
+        for i in 0..<albumResult.count {
+            self.collections.append(albumResult.object(at: i))
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return thumbnailResult.count;
+        return self.collections.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        
+        guard let cell: AlbumCollectionViewCell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: cellIdentifier, for: indexPath) as? AlbumCollectionViewCell else {
+                assertionFailure("error")
+                // 이렇게 처리해도 되는 것인지?
+                return UICollectionViewCell()
+        }
+        
+        let collection: PHAssetCollection = self.collections[indexPath.item]
+        let title: String = collection.localizedTitle!
+        var fetchOptions: PHFetchOptions? = PHFetchOptions()
+        if title == "Recents" {
+            fetchOptions = nil
+        }
+        else {
+            // 최신순
+            fetchOptions?.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        }
+            
+        let fetchResult: PHFetchResult<PHAsset> = PHAsset.fetchAssets(in: collection, options: fetchOptions)
+        cell.titleLabel.text = collection.localizedTitle
+        cell.countLabel.text = String(fetchResult.count)
+        
+        let options: PHImageRequestOptions = PHImageRequestOptions()
+        options.resizeMode = PHImageRequestOptionsResizeMode.exact
+        
+        // recents, favorites 의 경우 대표이미지로 lastObject를 골라야한다.
+        let lastImageCondition: Bool = title == "Recents" || title == "Favorites"
+        if let asset: PHAsset = (lastImageCondition ? fetchResult.lastObject : fetchResult.firstObject) {
+            imageManager.requestImage(for: asset,
+                                      targetSize: CGSize(width: cell.thumbnailImageView.bounds.width, height: cell.thumbnailImageView.bounds.height),
+                                      contentMode: .aspectFill,
+                                      options: options,
+                                      resultHandler: {image, _ in
+                                        cell.thumbnailImageView?.image = image
+            })
+        }
+        else {
+            cell.thumbnailImageView.image = UIImage(systemName: "photo")
+        }
+        return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let nextViewController: ListViewController = segue.destination as? ListViewController,
+            let indexPaths: [IndexPath] = collectionView.indexPathsForSelectedItems else {
+                return
+        }
+        nextViewController.collection = self.collections[indexPaths[0].item]
     }
 
 
