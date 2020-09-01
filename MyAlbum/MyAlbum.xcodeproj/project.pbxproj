@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		57131EC624FE527500CC405C /* ListToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57131EC524FE527500CC405C /* ListToolBar.swift */; };
 		571535FC24FD30D80085224F /* AlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571535FB24FD30D80085224F /* AlbumCollectionViewCell.swift */; };
 		571535FE24FD629D0085224F /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571535FD24FD629D0085224F /* ListViewController.swift */; };
 		5715360024FD70170085224F /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571535FF24FD70170085224F /* ListCollectionViewCell.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		57131EC524FE527500CC405C /* ListToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListToolBar.swift; sourceTree = "<group>"; };
 		571535FB24FD30D80085224F /* AlbumCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCollectionViewCell.swift; sourceTree = "<group>"; };
 		571535FD24FD629D0085224F /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		571535FF24FD70170085224F /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -68,10 +70,11 @@
 				574F8DCF24FBF02000736F47 /* Assets.xcassets */,
 				574F8DD124FBF02000736F47 /* LaunchScreen.storyboard */,
 				574F8DD424FBF02000736F47 /* Info.plist */,
-				571535FB24FD30D80085224F /* AlbumCollectionViewCell.swift */,
 				574F8DCA24FBF01F00736F47 /* AlbumViewController.swift */,
+				571535FB24FD30D80085224F /* AlbumCollectionViewCell.swift */,
 				571535FD24FD629D0085224F /* ListViewController.swift */,
 				571535FF24FD70170085224F /* ListCollectionViewCell.swift */,
+				57131EC524FE527500CC405C /* ListToolBar.swift */,
 			);
 			path = MyAlbum;
 			sourceTree = "<group>";
@@ -153,6 +156,7 @@
 				574F8DC724FBF01F00736F47 /* AppDelegate.swift in Sources */,
 				571535FE24FD629D0085224F /* ListViewController.swift in Sources */,
 				574F8DC924FBF01F00736F47 /* SceneDelegate.swift in Sources */,
+				57131EC624FE527500CC405C /* ListToolBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

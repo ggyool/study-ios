@@ -76,7 +76,7 @@
                                             <outlet property="countLabel" destination="IAJ-go-h0y" id="VbA-ym-ea0"/>
                                             <outlet property="thumbnailImageView" destination="bcE-Qx-Kij" id="Ydo-hF-TEt"/>
                                             <outlet property="titleLabel" destination="bIu-Dk-whL" id="LUM-6P-a1b"/>
-                                            <segue destination="thm-Bf-0DL" kind="show" id="Zd9-P3-txv"/>
+                                            <segue destination="thm-Bf-0DL" kind="show" id="8Ss-4r-cD0"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -122,7 +122,7 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
         </scene>
-        <!--List View Controller-->
+        <!--Item-->
         <scene sceneID="fHU-Jq-maX">
             <objects>
                 <viewController id="thm-Bf-0DL" customClass="ListViewController" customModule="MyAlbum" customModuleProvider="target" sceneMemberID="viewController">
@@ -168,6 +168,26 @@
                                     <outlet property="delegate" destination="thm-Bf-0DL" id="mEz-Uu-uRY"/>
                                 </connections>
                             </collectionView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qm6-Yd-HTh" customClass="ListToolBar" customModule="MyAlbum" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="852" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem image="square.and.arrow.up" catalog="system" id="LDQ-28-wwQ"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="MKk-mw-hTL"/>
+                                    <barButtonItem title="최신순" id="Vb8-YE-Bwz">
+                                        <connections>
+                                            <action selector="orderStateButton:" destination="Voc-Mk-51l" id="VqF-Nn-4wi"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="7vE-jF-tft"/>
+                                    <barButtonItem title="Item" image="trash" catalog="system" id="gKV-gx-AKG"/>
+                                </items>
+                                <connections>
+                                    <outlet property="activityButton" destination="LDQ-28-wwQ" id="jiJ-a4-fdS"/>
+                                    <outlet property="orderStateButton" destination="Vb8-YE-Bwz" id="diK-2a-QHw"/>
+                                    <outlet property="trashButton" destination="gKV-gx-AKG" id="26D-xC-fNY"/>
+                                </connections>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -178,14 +198,21 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ima-ta-cXF"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="1j5-AQ-rP6"/>
                     <navigationItem key="navigationItem" id="Cy9-cT-crL"/>
                     <connections>
                         <outlet property="collectionView" destination="v3Z-yv-GhW" id="vvh-Nb-LrO"/>
+                        <outlet property="toolBar" destination="Qm6-Yd-HTh" id="sSt-1Y-vnU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S98-WP-AyI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="Voc-Mk-51l" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2061" y="138"/>
+            <point key="canvasLocation" x="2028" y="138"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+        <image name="trash" catalog="system" width="121" height="128"/>
+    </resources>
 </document>
