@@ -146,7 +146,6 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
         
     }
     
-    
     // PHPhotoLibraryChangeObserver methods
     func photoLibraryDidChange(_ changeInstance: PHChange) {
         

@@ -6,21 +6,24 @@
 //  Copyright © 2020 ggyool. All rights reserved.
 //
 
-                // header 추가해야함
+                
 
 import UIKit
 import Photos
 
-class AlbumViewController: UIViewController, UICollectionViewDataSource {
+class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrollViewDelegate {
     
+    // header 추가해야함
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    let cellIdentifier:String = "cell"
-    // 모든 썸네일 이미지를 한번에 저장 하는건 부담스럽고, 에셋콜렉션 저장하는건 괜찮을까, 넘겨줄때도 편할것같은데
+    let cellIdentifier: String = "cell"
+    let headerIdentifier: String = "reusableView"
     var collections: [PHAssetCollection] = []
     var imageManager: PHCachingImageManager = PHCachingImageManager()
-
+    var headerHeight: CGFloat = 0
+    var isNavigationBarHidden: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initCollectionView()
@@ -34,9 +37,17 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource {
         if(authorizePhotoLibrary()){
             requestCollection()
         }
+        initNavigationBar()
+    }
+    
+    func initNavigationBar() {
+        navigationController?.navigationBar.alpha = 0
+        print("?")
     }
     
     func initCollectionView() {
+        // navigationController?.hidesBarsOnSwipe = true
+         // navigationController?.
         let criteria: CGFloat = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
         let distance: CGFloat = criteria/30
         let flowLayout: UICollectionViewFlowLayout =  UICollectionViewFlowLayout()
@@ -44,6 +55,9 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource {
         flowLayout.minimumInteritemSpacing = distance // 최소 item 간 거리
         flowLayout.minimumLineSpacing = distance // 줄 간의 최소 거리
         flowLayout.itemSize = CGSize(width: (criteria-3*distance)/2, height: criteria/2+3*distance)
+        
+        self.headerHeight = 5*distance
+        flowLayout.headerReferenceSize = CGSize(width: self.collectionView.frame.width, height: self.headerHeight)
         collectionView.collectionViewLayout = flowLayout
     }
     
@@ -90,9 +104,7 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource {
         
         guard let cell: AlbumCollectionViewCell = collectionView.dequeueReusableCell(
             withReuseIdentifier: cellIdentifier, for: indexPath) as? AlbumCollectionViewCell else {
-                assertionFailure("error")
-                // 이렇게 처리해도 되는 것인지?
-                return UICollectionViewCell()
+                fatalError()
         }
         
         let collection: PHAssetCollection = self.collections[indexPath.item]
@@ -128,6 +140,36 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource {
             cell.thumbnailImageView.image = UIImage(systemName: "photo")
         }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: self.headerIdentifier , for: indexPath)
+            return headerView
+        }
+        else {
+            assert(false)
+        }
+    }
+    
+    
+    // scroll view delegate
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let duration: TimeInterval = 0.5
+        if !self.isNavigationBarHidden && scrollView.contentOffset.y < self.headerHeight {
+            self.isNavigationBarHidden = true
+            self.navigationController?.navigationBar.alpha = 1
+            UIView.animate(withDuration: duration, animations: {
+                self.navigationController?.navigationBar.alpha = 0
+            })
+        }
+        else if self.isNavigationBarHidden && scrollView.contentOffset.y >= self.headerHeight {
+            self.isNavigationBarHidden = false
+            self.navigationController?.navigationBar.alpha = 0
+            UIView.animate(withDuration: duration, animations: {
+                self.navigationController?.navigationBar.alpha = 1
+            })
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

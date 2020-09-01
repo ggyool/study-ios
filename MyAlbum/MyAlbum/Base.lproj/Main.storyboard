@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="C8L-gQ-KU2">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,21 +13,21 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="AlbumViewController" customModule="MyAlbum" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9dv-Pz-zSE">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eEt-8b-tqc">
                                     <size key="itemSize" width="219" height="292"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="headerReferenceSize" width="50" height="50"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="aew-8P-QeK" customClass="AlbumCollectionViewCell" customModule="MyAlbum" customModuleProvider="target">
-                                        <rect key="frame" x="97.5" y="0.0" width="219" height="292"/>
+                                        <rect key="frame" x="50.5" y="50" width="219" height="292"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="03c-NR-4wG">
                                             <rect key="frame" x="0.0" y="0.0" width="219" height="292"/>
@@ -80,9 +80,28 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="reusableView" id="Kvq-zP-opP">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="앨범" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1K9-Y7-gWQ">
+                                            <rect key="frame" x="8" y="8" width="304" height="34"/>
+                                            <fontDescription key="fontDescription" type="system" weight="black" pointSize="40"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.79778467470000003" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="1K9-Y7-gWQ" secondAttribute="bottom" id="bft-qu-WNM"/>
+                                        <constraint firstItem="1K9-Y7-gWQ" firstAttribute="top" secondItem="Kvq-zP-opP" secondAttribute="topMargin" id="d1O-RZ-gi2"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="1K9-Y7-gWQ" secondAttribute="trailing" id="i1n-Db-3PA"/>
+                                        <constraint firstItem="1K9-Y7-gWQ" firstAttribute="leading" secondItem="Kvq-zP-opP" secondAttribute="leadingMargin" id="iLh-UU-YMU"/>
+                                    </constraints>
+                                </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="Ic8-ST-WrI"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="ycG-pO-P1m"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="hGj-Sy-MYM"/>
                                 </connections>
                             </collectionView>
                         </subviews>
@@ -102,7 +121,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1047.8260869565217" y="137.94642857142856"/>
+            <point key="canvasLocation" x="1046.25" y="137.32394366197184"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6H5-cF-rP7">
@@ -110,7 +129,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="C8L-gQ-KU2" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="alG-c0-oKd">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -127,11 +146,11 @@
             <objects>
                 <viewController id="thm-Bf-0DL" customClass="ListViewController" customModule="MyAlbum" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lU7-Ui-YsK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="v3Z-yv-GhW">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gnC-Zz-bfW">
                                     <size key="itemSize" width="128" height="128"/>
@@ -169,7 +188,7 @@
                                 </connections>
                             </collectionView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qm6-Yd-HTh" customClass="ListToolBar" customModule="MyAlbum" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="852" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem image="square.and.arrow.up" catalog="system" id="LDQ-28-wwQ"/>
@@ -180,7 +199,6 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="7vE-jF-tft"/>
-                                    <barButtonItem title="Item" image="trash" catalog="system" id="gKV-gx-AKG"/>
                                 </items>
                                 <connections>
                                     <outlet property="activityButton" destination="LDQ-28-wwQ" id="jiJ-a4-fdS"/>
@@ -207,6 +225,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S98-WP-AyI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="Voc-Mk-51l" userLabel="Exit" sceneMemberID="exit"/>
+                <barButtonItem title="Item" image="trash" catalog="system" id="gKV-gx-AKG"/>
             </objects>
             <point key="canvasLocation" x="2028" y="138"/>
         </scene>
