@@ -7,25 +7,25 @@
 //
 
                 
+// 1. large title 아래 seperator
+// 2. 뒤로가기 해서 왔을 때 large title로 보이도록
 
 import UIKit
 import Photos
 
 class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrollViewDelegate {
     
-    // header 추가해야함
-
     @IBOutlet weak var collectionView: UICollectionView!
     
     let cellIdentifier: String = "cell"
     let headerIdentifier: String = "reusableView"
     var collections: [PHAssetCollection] = []
     var imageManager: PHCachingImageManager = PHCachingImageManager()
-    var headerHeight: CGFloat = 0
     var isNavigationBarHidden: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initNavigationBar()
         initCollectionView()
         if(authorizePhotoLibrary()){
             requestCollection()
@@ -34,20 +34,18 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrol
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        initNavigationBar()
         if(authorizePhotoLibrary()){
             requestCollection()
         }
-        initNavigationBar()
     }
     
     func initNavigationBar() {
-        navigationController?.navigationBar.alpha = 0
-        print("?")
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.setToolbarHidden(true, animated: false)
     }
     
     func initCollectionView() {
-        // navigationController?.hidesBarsOnSwipe = true
-         // navigationController?.
         let criteria: CGFloat = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
         let distance: CGFloat = criteria/30
         let flowLayout: UICollectionViewFlowLayout =  UICollectionViewFlowLayout()
@@ -55,9 +53,6 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrol
         flowLayout.minimumInteritemSpacing = distance // 최소 item 간 거리
         flowLayout.minimumLineSpacing = distance // 줄 간의 최소 거리
         flowLayout.itemSize = CGSize(width: (criteria-3*distance)/2, height: criteria/2+3*distance)
-        
-        self.headerHeight = 5*distance
-        flowLayout.headerReferenceSize = CGSize(width: self.collectionView.frame.width, height: self.headerHeight)
         collectionView.collectionViewLayout = flowLayout
     }
     
@@ -142,34 +137,26 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrol
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionHeader {
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: self.headerIdentifier , for: indexPath)
-            return headerView
-        }
-        else {
-            assert(false)
-        }
-    }
-    
     
     // scroll view delegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let duration: TimeInterval = 0.5
-        if !self.isNavigationBarHidden && scrollView.contentOffset.y < self.headerHeight {
-            self.isNavigationBarHidden = true
-            self.navigationController?.navigationBar.alpha = 1
-            UIView.animate(withDuration: duration, animations: {
-                self.navigationController?.navigationBar.alpha = 0
-            })
-        }
-        else if self.isNavigationBarHidden && scrollView.contentOffset.y >= self.headerHeight {
-            self.isNavigationBarHidden = false
-            self.navigationController?.navigationBar.alpha = 0
-            UIView.animate(withDuration: duration, animations: {
-                self.navigationController?.navigationBar.alpha = 1
-            })
-        }
+//        let duration: TimeInterval = 0.5
+//        if !self.isNavigationBarHidden && scrollView.contentOffset.y < self.headerHeight {
+//            navigationController?.isNavigationBarHidden = true
+//            self.isNavigationBarHidden = true
+//            self.navigationController?.navigationBar.alpha = 1
+//            UIView.animate(withDuration: duration, animations: {
+//                self.navigationController?.navigationBar.alpha = 0
+//            })
+//        }
+//        else if self.isNavigationBarHidden && scrollView.contentOffset.y >= self.headerHeight {
+//            navigationController?.isNavigationBarHidden = false
+//            self.isNavigationBarHidden = false
+//            self.navigationController?.navigationBar.alpha = 0
+//            UIView.animate(withDuration: duration, animations: {
+//                self.navigationController?.navigationBar.alpha = 1
+//            })
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -99,8 +99,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     
-    // delegate protocols
-    
     // table view cell 편집 가능하도록
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true

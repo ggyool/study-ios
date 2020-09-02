@@ -12,16 +12,17 @@ import Photos
 class ListViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, PHPhotoLibraryChangeObserver {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var toolBar: ListToolBar!
+    @IBOutlet weak var activityButton: UIBarButtonItem!
+    @IBOutlet weak var orderStateButton: UIBarButtonItem!
+    @IBOutlet weak var trashButton: UIBarButtonItem!
+    var selectButton: UIBarButtonItem!
+    var cancelButton: UIBarButtonItem!
     
     let cellIdentifier: String = "cell"
     let imageManager: PHCachingImageManager = PHCachingImageManager()
 
     var collection: PHAssetCollection?
     var fetchResult: PHFetchResult<PHAsset>!
-    var selectButton: UIBarButtonItem!
-    var cancelButton: UIBarButtonItem!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,12 +52,14 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
         selectButton = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(self.touchUpSelectButton(_:)))
         cancelButton = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(self.touchUpCancelButton(_:)))
         self.navigationItem.rightBarButtonItem = selectButton
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.setToolbarHidden(false, animated: false)
     }
     
     func initToolBar() {
-        disableBarButton(toolBar.activityButton)
-        enableBarButton(toolBar.orderStateButton)
-        disableBarButton(toolBar.trashButton)
+        disableBarButton(self.activityButton)
+        enableBarButton(self.orderStateButton)
+        disableBarButton(self.trashButton)
     }
     
     func disableBarButton(_ button: UIBarButtonItem) {
@@ -66,7 +69,7 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func enableBarButton(_ button: UIBarButtonItem) {
         // default tint color 알아낼 방법이 있는지?
-        button.tintColor = toolBar.orderStateButton.tintColor
+        button.tintColor = self.orderStateButton.tintColor
         button.isEnabled = true
     }
     
@@ -76,8 +79,8 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.navigationItem.rightBarButtonItem = cancelButton
         collectionView.allowsSelection = true
         collectionView.allowsMultipleSelection = true
-        enableBarButton(toolBar.activityButton)
-        enableBarButton(toolBar.trashButton)
+        enableBarButton(self.activityButton)
+        enableBarButton(self.trashButton)
     }
     
     @objc func touchUpCancelButton(_ sender: UIBarButtonItem) {
@@ -86,8 +89,8 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.navigationItem.rightBarButtonItem = selectButton
         collectionView.allowsSelection = false
         collectionView.allowsMultipleSelection = false
-        disableBarButton(toolBar.activityButton)
-        disableBarButton(toolBar.trashButton)
+        disableBarButton(self.activityButton)
+        disableBarButton(self.trashButton)
     }
 
     
@@ -102,9 +105,6 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
-    
-    
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return fetchResult.count
     }
@@ -112,10 +112,8 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell: ListCollectionViewCell = collectionView.dequeueReusableCell(
             withReuseIdentifier: cellIdentifier, for: indexPath) as? ListCollectionViewCell else {
-                assertionFailure("error")
-                return UICollectionViewCell()
+                assert(false)
         }
-        
         let options: PHImageRequestOptions = PHImageRequestOptions()
         options.resizeMode = PHImageRequestOptionsResizeMode.exact
         let asset: PHAsset = fetchResult.object(at: indexPath.item)
@@ -131,23 +129,72 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
     
 
     // UICollectionViewDelegate methods
-    
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return collectionView.allowsSelection && collectionView.allowsMultipleSelection
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
         return collectionView.allowsSelection && collectionView.allowsMultipleSelection
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("select " + "\(indexPath.item)")
     }
-    
-    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         print("deSelect " + "\(indexPath.item)")
-        return false
-        
     }
+    
     
     // PHPhotoLibraryChangeObserver methods
     func photoLibraryDidChange(_ changeInstance: PHChange) {
+         guard let changes = changeInstance.changeDetails(for: fetchResult) else {
+             return
+         }
+         print("change")
+    }
+    
+    @IBAction func touchUpTrashButton(_ sender: UIBarButtonItem) {
+        guard let indexPaths: [IndexPath] = collectionView.indexPathsForSelectedItems else {
+            assert(false)
+        }
         
+        let abc: [IndexPath] = indexPaths.map { (indexPath) -> IndexPath in
+            return indexPath
+        }
+        collectionView.performBatchUpdates({
+            collectionView.deleteItems(at: [IndexPath(item: abc[0].item, section: 0)])
+        }, completion: nil)
+        
+     
+        
+//        collectionView.performBatchUpdates({
+//            collectionView.deleteItems(at:
+//                indexPaths.map { (indexPath) -> IndexPath in
+//                return indexPath
+//            })
+//
+//        }, completion: nil)
+        
+//        for indexPath in indexPaths{
+//            print(indexPath.item)
+//
+//        }
+        // 먼저 지워야 꼬이지 않는다고 함
+        
+        
+//        var deleteTarget: [PHAsset] = []
+//        for indexPath in indexPaths {
+//            let asset: PHAsset = self.fetchResult[indexPath.item]
+//            deleteTarget.append(asset)
+//        }
+//        PHPhotoLibrary.shared().performChanges({
+//            PHAssetChangeRequest.deleteAssets(deleteTarget as NSArray)
+//        }, completionHandler: nil)
+//
+//        self.requestAsset() // 데이터 새로고침
+//
+//        collectionView.reloadSections(IndexSet(0...0))
     }
 }
+
+

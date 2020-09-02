@@ -17,7 +17,6 @@
 		574F8DCE24FBF01F00736F47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 574F8DCC24FBF01F00736F47 /* Main.storyboard */; };
 		574F8DD024FBF02000736F47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 574F8DCF24FBF02000736F47 /* Assets.xcassets */; };
 		574F8DD324FBF02000736F47 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 574F8DD124FBF02000736F47 /* LaunchScreen.storyboard */; };
-		57AD896324FE8C88009977A3 /* AlbumCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD896224FE8C88009977A3 /* AlbumCollectionReusableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +32,6 @@
 		574F8DCF24FBF02000736F47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		574F8DD224FBF02000736F47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		574F8DD424FBF02000736F47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		57AD896224FE8C88009977A3 /* AlbumCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCollectionReusableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +72,6 @@
 				574F8DD424FBF02000736F47 /* Info.plist */,
 				574F8DCA24FBF01F00736F47 /* AlbumViewController.swift */,
 				571535FB24FD30D80085224F /* AlbumCollectionViewCell.swift */,
-				57AD896224FE8C88009977A3 /* AlbumCollectionReusableView.swift */,
 				571535FD24FD629D0085224F /* ListViewController.swift */,
 				571535FF24FD70170085224F /* ListCollectionViewCell.swift */,
 				57131EC524FE527500CC405C /* ListToolBar.swift */,
@@ -158,7 +155,6 @@
 				574F8DCB24FBF01F00736F47 /* AlbumViewController.swift in Sources */,
 				574F8DC724FBF01F00736F47 /* AppDelegate.swift in Sources */,
 				571535FE24FD629D0085224F /* ListViewController.swift in Sources */,
-				57AD896324FE8C88009977A3 /* AlbumCollectionReusableView.swift in Sources */,
 				574F8DC924FBF01F00736F47 /* SceneDelegate.swift in Sources */,
 				57131EC624FE527500CC405C /* ListToolBar.swift in Sources */,
 			);
