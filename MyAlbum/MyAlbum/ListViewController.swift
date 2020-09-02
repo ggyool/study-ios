@@ -79,8 +79,6 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.navigationItem.rightBarButtonItem = cancelButton
         collectionView.allowsSelection = true
         collectionView.allowsMultipleSelection = true
-        enableBarButton(self.activityButton)
-        enableBarButton(self.trashButton)
     }
     
     @objc func touchUpCancelButton(_ sender: UIBarButtonItem) {
@@ -138,62 +136,66 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("select " + "\(indexPath.item)")
+        if self.collectionView.indexPathsForSelectedItems?.count == 1 {
+            enableBarButton(self.activityButton)
+            enableBarButton(self.trashButton)
+        }
+        
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        print("deSelect " + "\(indexPath.item)")
+        if self.collectionView.indexPathsForSelectedItems?.count == 0 {
+            disableBarButton(self.activityButton)
+            disableBarButton(self.trashButton)
+        }
     }
     
     
-    // PHPhotoLibraryChangeObserver methods
-    func photoLibraryDidChange(_ changeInstance: PHChange) {
-         guard let changes = changeInstance.changeDetails(for: fetchResult) else {
-             return
-         }
-         print("change")
+    
+    @IBAction func touchUpOrderStateButton(_ sender: Any) {
+        
     }
     
+    
+    var deleteFlag: Bool = false
     @IBAction func touchUpTrashButton(_ sender: UIBarButtonItem) {
         guard let indexPaths: [IndexPath] = collectionView.indexPathsForSelectedItems else {
             assert(false)
         }
-        
-        let abc: [IndexPath] = indexPaths.map { (indexPath) -> IndexPath in
-            return indexPath
+        var deleteTarget: [PHAsset] = []
+        for indexPath in indexPaths {
+            let asset: PHAsset = self.fetchResult[indexPath.item]
+            deleteTarget.append(asset)
         }
-        collectionView.performBatchUpdates({
-            collectionView.deleteItems(at: [IndexPath(item: abc[0].item, section: 0)])
-        }, completion: nil)
-        
-     
-        
-//        collectionView.performBatchUpdates({
-//            collectionView.deleteItems(at:
-//                indexPaths.map { (indexPath) -> IndexPath in
-//                return indexPath
-//            })
-//
-//        }, completion: nil)
-        
-//        for indexPath in indexPaths{
-//            print(indexPath.item)
-//
-//        }
-        // 먼저 지워야 꼬이지 않는다고 함
-        
-        
-//        var deleteTarget: [PHAsset] = []
-//        for indexPath in indexPaths {
-//            let asset: PHAsset = self.fetchResult[indexPath.item]
-//            deleteTarget.append(asset)
-//        }
-//        PHPhotoLibrary.shared().performChanges({
-//            PHAssetChangeRequest.deleteAssets(deleteTarget as NSArray)
-//        }, completionHandler: nil)
-//
-//        self.requestAsset() // 데이터 새로고침
-//
-//        collectionView.reloadSections(IndexSet(0...0))
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.deleteAssets(deleteTarget as NSArray)
+            self.deleteFlag = true
+        })
+     }
+
+
+    // PHPhotoLibraryChangeObserver methods
+    // 가끔 2번 호출 되는 경우가 있다. 이유는 잘.. 부분적으로 지워지는것 같지는 않음
+    func photoLibraryDidChange(_ changeInstance: PHChange) {
+        guard let changes = changeInstance.changeDetails(for: fetchResult) else {
+            return
+        }
+        fetchResult = changes.fetchResultAfterChanges
+        OperationQueue.main.addOperation {
+            guard let indexPaths: [IndexPath] = self.collectionView.indexPathsForSelectedItems else {
+                assert(false)
+            }
+            // 지운 경우에는 지운 행만 삭제하고, 외부에서 이미지가 추가 된경우 새로고침 한다.
+            if self.deleteFlag {
+                self.collectionView.performBatchUpdates({
+                self.collectionView.deleteItems(at: indexPaths)
+                }, completion: { _ in
+                    self.deleteFlag = false
+                })
+            }
+            else {
+                self.collectionView.reloadSections(IndexSet(0...0))
+            }
+        }
     }
 }
 
