@@ -15,7 +15,7 @@ class ListCollectionViewCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             // 생성자 같은곳은 없는지
-            self.layer.borderColor = CGColor(srgbRed: 0.8, green: 0.8, blue: 0.2, alpha: 0.7)
+            self.layer.borderColor = CGColor(srgbRed: 0.8, green: 0.8, blue: 1, alpha: 0.9)
             self.layer.borderWidth = isSelected ? 5 : 0
         }
     }

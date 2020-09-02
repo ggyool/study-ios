@@ -23,6 +23,23 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     var collection: PHAssetCollection?
     var fetchResult: PHFetchResult<PHAsset>!
+    var orderState: OrderState = .forward {
+        didSet {
+            self.orderStateButton.title = self.orderState.rawValue
+        }
+    }
+    
+    enum OrderState: String {
+        case forward = "최신순"
+        case reverse = "과거순"
+        func getToggle() -> OrderState {
+            if self == .forward {
+                return .reverse
+            } else{
+                return .forward
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +86,7 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func enableBarButton(_ button: UIBarButtonItem) {
         // default tint color 알아낼 방법이 있는지?
-        button.tintColor = self.orderStateButton.tintColor
+        button.tintColor = self.selectButton.tintColor
         button.isEnabled = true
     }
     
@@ -79,6 +96,8 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.navigationItem.rightBarButtonItem = cancelButton
         collectionView.allowsSelection = true
         collectionView.allowsMultipleSelection = true
+        enableBarButton(self.orderStateButton)
+        disableBarButton(self.orderStateButton)
     }
     
     @objc func touchUpCancelButton(_ sender: UIBarButtonItem) {
@@ -88,6 +107,7 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
         collectionView.allowsSelection = false
         collectionView.allowsMultipleSelection = false
         disableBarButton(self.activityButton)
+        enableBarButton(self.orderStateButton)
         disableBarButton(self.trashButton)
     }
 
@@ -95,6 +115,8 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
     func requestAsset() {
         if collection?.localizedTitle == "Recents" {
             fetchResult = PHAsset.fetchAssets(in: collection!, options: nil)
+            // Recents 는 firstObject가 과거
+            self.orderState = .reverse
         }
         else {
             let fetchOptions = PHFetchOptions()
@@ -114,7 +136,12 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
         let options: PHImageRequestOptions = PHImageRequestOptions()
         options.resizeMode = PHImageRequestOptionsResizeMode.exact
-        let asset: PHAsset = fetchResult.object(at: indexPath.item)
+        let asset: PHAsset =
+        self.orderState == .forward ?
+            fetchResult.object(at: indexPath.item) :
+            fetchResult.object(at: fetchResult.count-indexPath.item-1)
+            
+        
         imageManager.requestImage(for: asset,
                                    targetSize: CGSize(width: cell.thumbnailImageView.bounds.width, height: cell.thumbnailImageView.bounds.height),
                                   contentMode: .aspectFill,
@@ -152,7 +179,8 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     
     @IBAction func touchUpOrderStateButton(_ sender: Any) {
-        
+        self.orderState = self.orderState.getToggle()
+        self.collectionView.reloadSections(IndexSet(0...0))
     }
     
     
