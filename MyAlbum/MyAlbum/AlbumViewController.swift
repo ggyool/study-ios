@@ -9,11 +9,12 @@
                 
 // 1. large title 아래 seperator
 // 2. 뒤로가기 해서 왔을 때 large title로 보이도록
+// 3. 배치 잘하는 방법이 무엇인지
 
 import UIKit
 import Photos
 
-class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrollViewDelegate {
+class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrollViewDelegate, PHPhotoLibraryChangeObserver {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -30,6 +31,7 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrol
         if(authorizePhotoLibrary()){
             requestCollection()
         }
+        PHPhotoLibrary.shared().register(self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,7 +54,7 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrol
         flowLayout.sectionInset = UIEdgeInsets(top: distance, left: distance, bottom: distance, right: distance)
         flowLayout.minimumInteritemSpacing = distance // 최소 item 간 거리
         flowLayout.minimumLineSpacing = distance // 줄 간의 최소 거리
-        flowLayout.itemSize = CGSize(width: (criteria-3*distance)/2, height: criteria/2+3*distance)
+        flowLayout.itemSize = CGSize(width: (criteria-3*distance)/2-0.1, height: criteria/2+3*distance)
         collectionView.collectionViewLayout = flowLayout
     }
     
@@ -80,6 +82,7 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrol
             PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumFavorites, options: nil)
         let albumResult: PHFetchResult<PHAssetCollection> =
             PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
+        self.collections.removeAll()
         if let cameraRoll: PHAssetCollection = cameraRollResult.firstObject {
             self.collections.append(cameraRoll)
         }
@@ -137,28 +140,6 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrol
         return cell
     }
     
-    
-    // scroll view delegate
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let duration: TimeInterval = 0.5
-//        if !self.isNavigationBarHidden && scrollView.contentOffset.y < self.headerHeight {
-//            navigationController?.isNavigationBarHidden = true
-//            self.isNavigationBarHidden = true
-//            self.navigationController?.navigationBar.alpha = 1
-//            UIView.animate(withDuration: duration, animations: {
-//                self.navigationController?.navigationBar.alpha = 0
-//            })
-//        }
-//        else if self.isNavigationBarHidden && scrollView.contentOffset.y >= self.headerHeight {
-//            navigationController?.isNavigationBarHidden = false
-//            self.isNavigationBarHidden = false
-//            self.navigationController?.navigationBar.alpha = 0
-//            UIView.animate(withDuration: duration, animations: {
-//                self.navigationController?.navigationBar.alpha = 1
-//            })
-//        }
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let nextViewController: ListViewController = segue.destination as? ListViewController,
             let indexPaths: [IndexPath] = collectionView.indexPathsForSelectedItems else {
@@ -167,6 +148,11 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrol
         nextViewController.collection = self.collections[indexPaths[0].item]
     }
 
-
+    func photoLibraryDidChange(_ changeInstance: PHChange) {
+        // 바뀌 결과를 가지고 할 수도 있으나 collections 배열도 바꿔야 하기 때문에 다시 fetch 해온다.
+        requestCollection()
+        OperationQueue.main.addOperation({
+            self.collectionView.reloadSections(IndexSet(0...0))
+        })
+    }
 }
-

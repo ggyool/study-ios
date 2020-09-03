@@ -11,12 +11,12 @@ import UIKit
 class ListCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var thumbnailImageView: UIImageView!
-    
+
     override var isSelected: Bool {
         didSet {
-            // 생성자 같은곳은 없는지
-            self.layer.borderColor = CGColor(srgbRed: 0.8, green: 0.8, blue: 1, alpha: 0.9)
-            self.layer.borderWidth = isSelected ? 5 : 0
+            if isSelected == false {
+                self.layer.borderWidth = 0
+            }
         }
     }
     
