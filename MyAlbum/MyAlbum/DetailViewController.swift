@@ -91,19 +91,30 @@ class DetailViewController: UIViewController, UIScrollViewDelegate, PHPhotoLibra
     }
     
     @objc func touchUpActivityButton(_ sender: UIBarButtonItem) {
-        // 다시 로드해야 하지 않을까
-//        let imageToShare: UIImage = UIImage(named: "iphone")!
-//
-//        let activityViewController = UIActivityViewController(activityItems: [imageToShare], applicationActivities: nil)
-//
-//        activityViewController.completionWithItemsHandler = { (activity, success, items, error) in
-//            if success {
-//            print("seccess")
-//           }  else  {
-//            print("fail")
-//           }
-//        }
-//        self.present(activityViewController, animated: true, completion: nil)
+        var shareImage: UIImage = UIImage()
+        let options = PHImageRequestOptions()
+        options.isSynchronous = true
+        options.resizeMode = PHImageRequestOptionsResizeMode.none
+        imageManager.requestImage(for: self.asset,
+                                  targetSize: PHImageManagerMaximumSize,
+                                  contentMode: .default,
+                                  options: options,
+                                  resultHandler: {loadedImage, _ in
+                                    guard let image = loadedImage else {
+                                        return
+                                    }
+                                    shareImage = image
+        })
+        
+        let activityViewController = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
+        activityViewController.completionWithItemsHandler = { (activity, success, items, error) in
+            if success {
+                // success
+            } else  {
+                // fail
+            }
+        }
+        self.present(activityViewController, animated: true, completion: nil)
     }
     
     @objc func touchUpFavoriteButton(_ sender: UIBarButtonItem) {

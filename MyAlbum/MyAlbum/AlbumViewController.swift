@@ -7,7 +7,7 @@
 //
 
                 
-// 1. large title 아래 seperator
+// 1. navi bar appearance
 // 2. 뒤로가기 해서 왔을 때 large title로 보이도록
 // 3. 배치 잘하는 방법이 무엇인지
 
@@ -43,8 +43,12 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrol
     }
     
     func initNavigationBar() {
-        navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.setToolbarHidden(true, animated: false)
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        
+        // 없으면 large title 일 때 separator 안 생긴다.
+        let appearance = UINavigationBarAppearance()
+        self.navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
     func initCollectionView() {
@@ -149,7 +153,7 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrol
     }
 
     func photoLibraryDidChange(_ changeInstance: PHChange) {
-        // 바뀌 결과를 가지고 할 수도 있으나 collections 배열도 바꿔야 하기 때문에 다시 fetch 해온다.
+        // 어떤 변화가 있을지 모르기 때문에 다시 요청하는게 나을듯
         requestCollection()
         OperationQueue.main.addOperation({
             self.collectionView.reloadSections(IndexSet(0...0))

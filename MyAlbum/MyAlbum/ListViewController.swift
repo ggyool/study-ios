@@ -202,26 +202,37 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     @IBAction func touchUpActivityButton(_ sender: Any) {
-        
-        let imageToShare: UIImage = UIImage(named: "iphone")!
-        //let urlToShare: String = "http://www.edwith.org/boostcourse-ios"
-        //let textToShare: String = "안녕하세요, 부스트 코스입니다."
-
-//        let activityViewController = UIActivityViewController(activityItems: [imageToShare, urlToShare, textToShare], applicationActivities: nil)
-  
-        let activityViewController = UIActivityViewController(activityItems: [imageToShare], applicationActivities: nil)
-        // 2. 기본으로 제공되는 서비스 중 사용하지 않을 UIActivityType 제거(선택 사항)
-//        activityViewController.excludedActivityTypes = [UIActivityType.addToReadingList, UIActivityType.assignToContact]
-
-        // 3. 컨트롤러를 닫은 후 실행할 완료 핸들러 지정
+        guard let indexPaths: [IndexPath] = self.collectionView.indexPathsForSelectedItems else {
+            assert(false)
+        }
+        var selectedImages: [UIImage] = []
+        for indexPath in indexPaths {
+            let idx: Int = self.getAssetIndex(indexPath.item)
+            let asset: PHAsset = self.fetchResult[idx]
+            
+            // 원본 이미지 가져오는 방법 맞는지?
+            let options = PHImageRequestOptions()
+            options.isSynchronous = true
+            options.resizeMode = PHImageRequestOptionsResizeMode.none
+            imageManager.requestImage(for: asset,
+                                      targetSize: PHImageManagerMaximumSize,
+                                      contentMode: .aspectFill,
+                                      options: options,
+                                      resultHandler: {loadedImage, _ in
+                                        guard let image = loadedImage else {
+                                            return
+                                        }
+                                        selectedImages.append(image)
+            })
+        }
+        let activityViewController = UIActivityViewController(activityItems: selectedImages, applicationActivities: nil)
         activityViewController.completionWithItemsHandler = { (activity, success, items, error) in
             if success {
-            print("seccess")
-           }  else  {
-            print("fail")
-           }
+                self.touchUpCancelButton(self.cancelButton) // 지우고 탐색모드로 돌아옴
+            } else  {
+                // fail
+            }
         }
-        // 4. 컨트롤러 나타내기(iPad에서는 팝 오버로, iPhone과 iPod에서는 모달로 나타냅니다.)
         self.present(activityViewController, animated: true, completion: nil)
     }
     
@@ -273,7 +284,6 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
             }
         }
     }
-    
     
     // orderState가 .reverse인 경우 뒤에서 부터 채웠으므로 실제 fetchResult의 인덱스는 뒤집어야 한다.
     func getAssetIndex(_ indexPathItem: Int) -> Int {
