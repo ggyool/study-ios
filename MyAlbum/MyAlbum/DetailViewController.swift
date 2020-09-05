@@ -80,14 +80,9 @@ class DetailViewController: UIViewController, UIScrollViewDelegate, PHPhotoLibra
                                   contentMode: .aspectFill,
                                   options: nil,
                                   resultHandler: { image, _ in
-                                    // 비동기적이게 하려면 어떻게 하는건지? 이미 비동기인지?
+                                    // 비동기인지?
                                     self.imageView.image = image
         })
-    }
-    
-    func refreshPage() {
-        loadCreationDate()
-        loadFavorite()
     }
     
     @objc func touchUpActivityButton(_ sender: UIBarButtonItem) {
@@ -148,5 +143,10 @@ class DetailViewController: UIViewController, UIScrollViewDelegate, PHPhotoLibra
             self.refreshPage()
         }
     }
+    
+     func refreshPage() {
+         loadCreationDate()
+         loadFavorite()
+     }
     
 }

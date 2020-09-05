@@ -23,6 +23,8 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     var collection: PHAssetCollection?
     var fetchResult: PHFetchResult<PHAsset>!
+    
+    
     var selectMode: Bool = false
     var deleteFlag: Bool = false
     var orderState: OrderState = .forward {
@@ -88,7 +90,6 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func enableBarButton(_ button: UIBarButtonItem) {
-        // default tint color 알아낼 방법이 있는지?
         button.tintColor = self.selectButton.tintColor
         button.isEnabled = true
     }
@@ -152,7 +153,6 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
         options.resizeMode = PHImageRequestOptionsResizeMode.exact
         let idx: Int = self.getAssetIndex(indexPath.item)
         let asset: PHAsset = fetchResult.object(at: idx)
-        
         imageManager.requestImage(for: asset,
                                    targetSize: CGSize(width: cell.thumbnailImageView.bounds.width, height: cell.thumbnailImageView.bounds.height),
                                   contentMode: .aspectFill,
@@ -182,10 +182,21 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
             self.navigationController?.pushViewController(nextViewController, animated: true)
             return
         }
+        
+        // title text
+        if let selectedCount: Int = self.collectionView.indexPathsForSelectedItems?.count {
+            if selectedCount == 0{
+                self.navigationItem.title = "항목 선택"
+            } else {
+                self.navigationItem.title = "\(selectedCount)장 선택"
+            }
+        }
+        // 선택에 따른 버튼 활성화
         if self.collectionView.indexPathsForSelectedItems?.count == 1 {
             enableBarButton(self.activityButton)
             enableBarButton(self.trashButton)
         }
+        // 선택 셀 테두리 설정
         if let cell: ListCollectionViewCell = self.collectionView.cellForItem(at: indexPath) as? ListCollectionViewCell {
             cell.layer.borderWidth = 5
         }
@@ -195,6 +206,15 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
         if !self.selectMode {
             return
         }
+        // 타이틀 설정
+        if let selectedCount: Int = self.collectionView.indexPathsForSelectedItems?.count {
+            if selectedCount == 0{
+                self.navigationItem.title = "항목 선택"
+            } else {
+                self.navigationItem.title = "\(selectedCount)장 선택"
+            }
+        }
+        // 선택에 따른 버튼 비활성화
         if self.collectionView.indexPathsForSelectedItems?.count == 0 {
             disableBarButton(self.activityButton)
             disableBarButton(self.trashButton)
@@ -242,6 +262,14 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.collectionView.reloadSections(IndexSet(0...0))
     }
     
+    // .reverse인 경우 fetchResult의 뒤부터 cell로 가져온다.
+    func getAssetIndex(_ indexPathItem: Int) -> Int {
+        if self.orderState == .forward {
+            return indexPathItem
+        }
+        return self.fetchResult.count - indexPathItem - 1
+    }
+    
     @IBAction func touchUpTrashButton(_ sender: UIBarButtonItem) {
         guard let indexPaths: [IndexPath] = self.collectionView.indexPathsForSelectedItems else {
             assert(false)
@@ -260,7 +288,6 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
 
 
     // PHPhotoLibraryChangeObserver methods
-    // 가끔 2번 호출 되는 경우가 있다. 이유는 잘.. 부분적으로 지워지는것 같지는 않음
     func photoLibraryDidChange(_ changeInstance: PHChange) {
         guard let changes = changeInstance.changeDetails(for: fetchResult) else {
             return
@@ -272,6 +299,7 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
             }
             // 지운 경우에는 지운 행만 삭제하고, 외부에서 이미지가 추가 된경우 새로고침 한다.
             if self.deleteFlag {
+                print("delete")
                 self.collectionView.performBatchUpdates({
                 self.collectionView.deleteItems(at: indexPaths)
                 }, completion: { _ in
@@ -280,18 +308,13 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
                 })
             }
             else {
+                print("refresh")
                 self.collectionView.reloadSections(IndexSet(0...0))
             }
         }
     }
     
-    // orderState가 .reverse인 경우 뒤에서 부터 채웠으므로 실제 fetchResult의 인덱스는 뒤집어야 한다.
-    func getAssetIndex(_ indexPathItem: Int) -> Int {
-        if self.orderState == .forward {
-            return indexPathItem
-        }
-        return self.fetchResult.count - indexPathItem - 1
-    }
+    
     
 }
 

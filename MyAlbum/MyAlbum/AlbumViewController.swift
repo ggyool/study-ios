@@ -19,10 +19,8 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrol
     @IBOutlet weak var collectionView: UICollectionView!
     
     let cellIdentifier: String = "cell"
-    let headerIdentifier: String = "reusableView"
     var collections: [PHAssetCollection] = []
     var imageManager: PHCachingImageManager = PHCachingImageManager()
-    var isNavigationBarHidden: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,23 +28,25 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrol
         initCollectionView()
         if(authorizePhotoLibrary()){
             requestCollection()
+            self.collectionView.reloadSections(IndexSet(0...0))
         }
         PHPhotoLibrary.shared().register(self)
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        initNavigationBar()
-        if(authorizePhotoLibrary()){
-            requestCollection()
-        }
-    }
+//    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(true)
+//        initNavigationBar()
+//        if(authorizePhotoLibrary()){
+//            requestCollection()
+//            self.collectionView.reloadSections(IndexSet(0...0))
+//        }
+//    }
     
     func initNavigationBar() {
         navigationController?.setToolbarHidden(true, animated: false)
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
-        // 없으면 large title 일 때 separator 안 생긴다.
+        // large title일 때 separator
         let appearance = UINavigationBarAppearance()
         self.navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
@@ -58,7 +58,7 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrol
         flowLayout.sectionInset = UIEdgeInsets(top: distance, left: distance, bottom: distance, right: distance)
         flowLayout.minimumInteritemSpacing = distance // 최소 item 간 거리
         flowLayout.minimumLineSpacing = distance // 줄 간의 최소 거리
-        flowLayout.itemSize = CGSize(width: (criteria-3*distance)/2-0.1, height: criteria/2+3*distance)
+        flowLayout.itemSize = CGSize(width: (criteria-3*distance)/2, height: criteria/2+3*distance)
         collectionView.collectionViewLayout = flowLayout
     }
     
@@ -72,7 +72,7 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrol
             PHPhotoLibrary.requestAuthorization({
                 (status) in
                 if status == .authorized {
-                     isAuthorized = true
+                    isAuthorized = true
                 }
             })
         }
@@ -103,12 +103,10 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrol
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         guard let cell: AlbumCollectionViewCell = collectionView.dequeueReusableCell(
             withReuseIdentifier: cellIdentifier, for: indexPath) as? AlbumCollectionViewCell else {
                 fatalError()
         }
-        
         let collection: PHAssetCollection = self.collections[indexPath.item]
         let title: String = collection.localizedTitle!
         var fetchOptions: PHFetchOptions? = PHFetchOptions()
