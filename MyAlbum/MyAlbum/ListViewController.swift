@@ -315,7 +315,6 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     
-    
 }
 
 

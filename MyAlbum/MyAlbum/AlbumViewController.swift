@@ -7,10 +7,6 @@
 //
 
                 
-// 1. navi bar appearance
-// 2. 뒤로가기 해서 왔을 때 large title로 보이도록
-// 3. 배치 잘하는 방법이 무엇인지
-
 import UIKit
 import Photos
 
@@ -32,15 +28,12 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrol
         }
         PHPhotoLibrary.shared().register(self)
     }
-//    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(true)
-//        initNavigationBar()
-//        if(authorizePhotoLibrary()){
-//            requestCollection()
-//            self.collectionView.reloadSections(IndexSet(0...0))
-//        }
-//    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.setToolbarHidden(true, animated: false)
+    }
     
     func initNavigationBar() {
         navigationController?.setToolbarHidden(true, animated: false)
@@ -50,7 +43,7 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrol
         let appearance = UINavigationBarAppearance()
         self.navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
-    
+
     func initCollectionView() {
         let criteria: CGFloat = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
         let distance: CGFloat = criteria/30
