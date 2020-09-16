@@ -59,9 +59,9 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
         let distance: CGFloat = criteria/60
         let flowLayout: UICollectionViewFlowLayout =  UICollectionViewFlowLayout()
         flowLayout.sectionInset = UIEdgeInsets.zero
-        flowLayout.minimumInteritemSpacing = distance // 최소 item 간 거리
+        flowLayout.minimumInteritemSpacing = distance-1 // 최소 item 간 거리
         flowLayout.minimumLineSpacing = distance // 줄 간의 최소 거리
-        flowLayout.itemSize = CGSize(width: (criteria-2*distance)/3-0.1, height: (criteria-2*distance)/3)
+        flowLayout.itemSize = CGSize(width: (criteria-2*distance)/3, height: (criteria-2*distance)/3)
         collectionView.collectionViewLayout = flowLayout
     
         self.selectMode = false
