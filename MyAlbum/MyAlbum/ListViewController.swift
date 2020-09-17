@@ -54,14 +54,21 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
         PHPhotoLibrary.shared().register(self)
     }
     
+    
+
     func initCollectionView() {
         let criteria: CGFloat = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
-        let distance: CGFloat = criteria/60
+        let miniumItemCountInLine: CGFloat = 3.0
+        let spacingCount: CGFloat = miniumItemCountInLine - 1.0
+        let edgeSpacing: CGFloat = 0
+        let itemSpacing: CGFloat = criteria/60
         let flowLayout: UICollectionViewFlowLayout =  UICollectionViewFlowLayout()
         flowLayout.sectionInset = UIEdgeInsets.zero
-        flowLayout.minimumInteritemSpacing = distance-1 // 최소 item 간 거리
-        flowLayout.minimumLineSpacing = distance // 줄 간의 최소 거리
-        flowLayout.itemSize = CGSize(width: (criteria-2*distance)/3, height: (criteria-2*distance)/3)
+        flowLayout.minimumInteritemSpacing = itemSpacing-1 // 최소 item 간 거리
+        flowLayout.minimumLineSpacing = itemSpacing // 줄 간의 최소 거리
+        let cellWidth: CGFloat = (criteria-itemSpacing*spacingCount-2*edgeSpacing)/miniumItemCountInLine
+        let cellHeight: CGFloat = cellWidth
+        flowLayout.itemSize = CGSize(width: cellWidth, height: cellHeight)
         collectionView.collectionViewLayout = flowLayout
     
         self.selectMode = false

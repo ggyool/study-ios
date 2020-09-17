@@ -10,7 +10,7 @@
 import UIKit
 import Photos
 
-class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrollViewDelegate, PHPhotoLibraryChangeObserver, UICollectionViewDelegateFlowLayout {
+class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrollViewDelegate, PHPhotoLibraryChangeObserver {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -47,19 +47,21 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrol
     func initCollectionView() {
         
         let flowLayout: UICollectionViewFlowLayout =  UICollectionViewFlowLayout()
-        print(UIScreen.main.bounds.width)
-        print(self.view.bounds.width)
         let criteria: CGFloat = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
-        let distance: CGFloat = criteria/30
-        flowLayout.sectionInset = UIEdgeInsets(top: distance, left: distance, bottom: distance, right: distance)
-        flowLayout.minimumInteritemSpacing = distance-1 // 최소 item 간 거리
-        flowLayout.minimumLineSpacing = distance // 줄 간의 최소 거리
-        flowLayout.itemSize = CGSize(width: (criteria-3*distance)/2, height: criteria/2+3*distance)
+        let miniumItemCountInLine: CGFloat = 2.0
+        let spacingCount: CGFloat = miniumItemCountInLine - 1.0
+        let edgeSpacing: CGFloat = criteria/30
+        let itemSpacing: CGFloat = criteria/30
+        flowLayout.sectionInset = UIEdgeInsets(top: edgeSpacing, left: edgeSpacing, bottom: edgeSpacing, right: edgeSpacing)
+        flowLayout.minimumInteritemSpacing = itemSpacing - 1// 최소 item 간 거리
+        flowLayout.minimumLineSpacing = itemSpacing // 줄 간의 최소 거리
+        
+        let cellWidth: CGFloat = (criteria-itemSpacing*spacingCount-2*edgeSpacing)/miniumItemCountInLine
+        let cellHeight: CGFloat = criteria/2+3*itemSpacing
+        flowLayout.itemSize = CGSize(width: cellWidth, height: cellHeight)
         collectionView.collectionViewLayout = flowLayout
     
     }
-    
-
 
     
     func authorizePhotoLibrary() -> Bool {
