@@ -12,12 +12,12 @@ class ListCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var thumbnailImageView: UIImageView!
 
-    override var isSelected: Bool {
-        didSet {
-            if isSelected == false {
-                self.layer.borderWidth = 0
-            }
-        }
-    }
+//    override var isSelected: Bool {
+//        didSet {
+//            if isSelected == false {
+//                self.layer.borderWidth = 0
+//            }
+//        }
+//    }
     
 }

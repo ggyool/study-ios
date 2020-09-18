@@ -46,21 +46,21 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIScrol
 
     func initCollectionView() {
         
-        let flowLayout: UICollectionViewFlowLayout =  UICollectionViewFlowLayout()
-        let criteria: CGFloat = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
-        let miniumItemCountInLine: CGFloat = 2.0
-        let spacingCount: CGFloat = miniumItemCountInLine - 1.0
-        let edgeSpacing: CGFloat = criteria/30
-        let itemSpacing: CGFloat = criteria/30
-        flowLayout.sectionInset = UIEdgeInsets(top: edgeSpacing, left: edgeSpacing, bottom: edgeSpacing, right: edgeSpacing)
-        flowLayout.minimumInteritemSpacing = itemSpacing - 1// 최소 item 간 거리
-        flowLayout.minimumLineSpacing = itemSpacing // 줄 간의 최소 거리
+        // 나중에 Trait collection 이용하는 방법으로 만들어보자
+        let viewWidth: CGFloat = view.bounds.width
+        let itemCountPerLine: CGFloat = 2
+        let spacingCountPerLine: CGFloat = itemCountPerLine - 1
+        let itemSpacing: CGFloat = viewWidth * 0.03
+        let edgeMargin: CGFloat = viewWidth * 0.03
+        let cellWidth: CGFloat = (viewWidth - itemSpacing * spacingCountPerLine - 2*edgeMargin) / itemCountPerLine
+        let cellHeight: CGFloat = 1.4 * cellWidth
         
-        let cellWidth: CGFloat = (criteria-itemSpacing*spacingCount-2*edgeSpacing)/miniumItemCountInLine
-        let cellHeight: CGFloat = criteria/2+3*itemSpacing
+        let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        flowLayout.sectionInset = UIEdgeInsets(top: edgeMargin, left: edgeMargin, bottom: edgeMargin, right: edgeMargin)
+        flowLayout.minimumInteritemSpacing = itemSpacing * 0.8
+        flowLayout.minimumLineSpacing = itemSpacing
         flowLayout.itemSize = CGSize(width: cellWidth, height: cellHeight)
         collectionView.collectionViewLayout = flowLayout
-    
     }
 
     

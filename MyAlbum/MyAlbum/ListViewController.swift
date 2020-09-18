@@ -26,7 +26,7 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     
     var selectMode: Bool = false
-    var deleteFlag: Bool = false
+    
     var orderState: OrderState = .forward {
         didSet {
             self.orderStateButton.title = self.orderState.rawValue
@@ -153,9 +153,17 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
             withReuseIdentifier: cellIdentifier, for: indexPath) as? ListCollectionViewCell else {
                 assert(false)
         }
-        
         cell.layer.borderColor = CGColor(srgbRed: 0.8, green: 0.8, blue: 1, alpha: 0.9)
-        
+        // cell reuse
+        if self.collectionView.indexPathsForSelectedItems?.contains(indexPath) ?? false {
+            cell.isSelected = true
+            cell.layer.borderWidth = 5
+        }
+        else {
+            cell.isSelected = false
+            cell.layer.borderWidth = 0
+        }
+
         let options: PHImageRequestOptions = PHImageRequestOptions()
         options.resizeMode = PHImageRequestOptionsResizeMode.exact
         let idx: Int = self.getAssetIndex(indexPath.item)
@@ -226,6 +234,9 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
             disableBarButton(self.activityButton)
             disableBarButton(self.trashButton)
         }
+        if let cell: ListCollectionViewCell = self.collectionView.cellForItem(at: indexPath) as? ListCollectionViewCell {
+            cell.layer.borderWidth = 0
+        }
     }
     
     @IBAction func touchUpActivityButton(_ sender: Any) {
@@ -237,7 +248,7 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
             let idx: Int = self.getAssetIndex(indexPath.item)
             let asset: PHAsset = self.fetchResult[idx]
             
-            // 원본 이미지 가져오는 방법 맞는지?
+            // 원본 이미지 가져오기
             let options = PHImageRequestOptions()
             options.isSynchronous = true
             options.resizeMode = PHImageRequestOptionsResizeMode.none
@@ -289,8 +300,8 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
         PHPhotoLibrary.shared().performChanges({
             PHAssetChangeRequest.deleteAssets(deleteTarget as NSArray)
-            self.deleteFlag = true
         })
+        
      }
 
 
@@ -301,21 +312,28 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
         fetchResult = changes.fetchResultAfterChanges
         OperationQueue.main.addOperation {
-            guard let indexPaths: [IndexPath] = self.collectionView.indexPathsForSelectedItems else {
-                assert(false)
-            }
-            // 지운 경우에는 지운 행만 삭제하고, 외부에서 이미지가 추가 된경우 새로고침 한다.
-            if self.deleteFlag {
-                print("delete")
+            // 변경 사항이 커서 reload 해야할 시 false
+            if changes.hasIncrementalChanges {
                 self.collectionView.performBatchUpdates({
-                self.collectionView.deleteItems(at: indexPaths)
+                    if let removed = changes.removedIndexes, removed.count > 0 {
+                        print("remove")
+                        self.collectionView.deleteItems(at: removed.map { IndexPath(item: $0, section:0) })
+                    }
+                    if let inserted = changes.insertedIndexes, inserted.count > 0 {
+                        print("insert")
+                        self.collectionView.insertItems(at: inserted.map { IndexPath(item: $0, section:0) })
+                    }
+                    if let changed = changes.changedIndexes, changed.count > 0 {
+                        print("change")
+                        self.collectionView.reloadItems(at: changed.map { IndexPath(item: $0, section:0) })
+                    }
                 }, completion: { _ in
-                    self.deleteFlag = false
                     self.touchUpCancelButton(self.cancelButton) // 지우고 탐색모드로 돌아옴
                 })
+                
             }
             else {
-                print("refresh")
+                print("reload")
                 self.collectionView.reloadSections(IndexSet(0...0))
             }
         }
