@@ -22,47 +22,47 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableIdentifier" id="NGe-UI-GMS" customClass="CustomTableViewCell" customModule="BoxOffice" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="141.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="142.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NGe-UI-GMS" id="4RE-5w-277">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="141.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="142.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jfr-SI-kzA">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="141.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="142.5"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dummyImage.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Dbm-up-aKv">
-                                                            <rect key="frame" x="0.0" y="0.0" width="99.5" height="141.5"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dummyImage" translatesAutoresizingMaskIntoConstraints="NO" id="Dbm-up-aKv">
+                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="142.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="Dbm-up-aKv" secondAttribute="height" multiplier="99:141" id="z3g-fU-cJT"/>
                                                             </constraints>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="bY0-Bs-gGw">
-                                                            <rect key="frame" x="104.5" y="0.0" width="309.5" height="141.5"/>
+                                                            <rect key="frame" x="105" y="0.0" width="309" height="142.5"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="left" alignment="center" spacing="5" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eth-r9-dvr">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="309.5" height="47"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="309" height="47.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="신과함께-죄와벌" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N3R-kr-Ht1">
-                                                                            <rect key="frame" x="0.0" y="11.5" width="130.5" height="24"/>
-                                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                                            <rect key="frame" x="0.0" y="12" width="130.5" height="24"/>
+                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_12" translatesAutoresizingMaskIntoConstraints="NO" id="XZF-Mi-lWA">
-                                                                            <rect key="frame" x="135.5" y="13.5" width="20" height="20"/>
+                                                                            <rect key="frame" x="135.5" y="14" width="20" height="20"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="XZF-Mi-lWA" secondAttribute="height" multiplier="1:1" id="fmJ-IB-JRc"/>
                                                                             </constraints>
                                                                         </imageView>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mRd-7a-1Gx">
-                                                                            <rect key="frame" x="160.5" y="0.0" width="149" height="47"/>
+                                                                            <rect key="frame" x="160.5" y="0.0" width="148.5" height="47.5"/>
                                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         </view>
                                                                     </subviews>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="left" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zCD-kF-Xcg">
-                                                                    <rect key="frame" x="0.0" y="47" width="309.5" height="47.5"/>
+                                                                    <rect key="frame" x="0.0" y="47.5" width="309" height="47.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="평점:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zIF-eM-rRM">
                                                                             <rect key="frame" x="0.0" y="0.0" width="30.5" height="47.5"/>
@@ -102,28 +102,28 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TZo-hl-vwm">
-                                                                            <rect key="frame" x="257" y="0.0" width="52.5" height="47.5"/>
+                                                                            <rect key="frame" x="257" y="0.0" width="52" height="47.5"/>
                                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         </view>
                                                                     </subviews>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="2dM-rX-9fm">
-                                                                    <rect key="frame" x="0.0" y="94.5" width="309.5" height="47"/>
+                                                                    <rect key="frame" x="0.0" y="95" width="309" height="47.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개봉일:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0KS-jQ-uTI">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="43.5" height="47"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="43.5" height="47.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017-10-25" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FL1-PS-nLw">
-                                                                            <rect key="frame" x="48.5" y="0.0" width="81" height="47"/>
+                                                                            <rect key="frame" x="48.5" y="0.0" width="81" height="47.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1A4-Rj-cx2">
-                                                                            <rect key="frame" x="134.5" y="0.0" width="175" height="47"/>
+                                                                            <rect key="frame" x="134.5" y="0.0" width="174.5" height="47.5"/>
                                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         </view>
                                                                     </subviews>
@@ -167,10 +167,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="예매율 순" id="UM6-Q8-OSn">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="ic_settings" id="8dv-Sa-Ds7"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="ic_settings" id="8dv-Sa-Ds7">
+                            <connections>
+                                <action selector="touchUpOrderButton:" destination="BYZ-38-t0r" id="ct6-AM-WBK"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="tableView" destination="73b-Kz-SIg" id="3tX-5b-b5I"/>
+                        <outlet property="tableView" destination="73b-Kz-SIg" id="Rko-aj-SD0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -267,7 +271,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="dummyImage.jpg" width="99" height="141"/>
+        <image name="dummyImage" width="99" height="141"/>
         <image name="ic_12" width="20" height="20"/>
         <image name="ic_collection" width="25" height="25"/>
         <image name="ic_settings" width="24" height="24"/>

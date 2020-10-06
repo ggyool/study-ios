@@ -132,7 +132,7 @@ class ListViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     
     func requestAsset() {
-        // 모든 result는 과거순으로 불러옴
+        // 모든 result는 과거순으로 불w러옴
         if collection?.localizedTitle == "Recents" {
             fetchResult = PHAsset.fetchAssets(in: collection!, options: nil)
         }
