@@ -8,6 +8,7 @@
 import Foundation
 
 let DidReceiveMoviesNotification: Notification.Name = Notification.Name("DidReceiveMovies")
+
 let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd"
