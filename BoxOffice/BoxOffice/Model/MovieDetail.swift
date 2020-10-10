@@ -1,16 +1,22 @@
 //
-//  Movie.swift
+//  MovieDetail.swift
 //  BoxOffice
 //
-//  Created by ggyool on 2020/10/05.
+//  Created by ggyool on 2020/10/10.
 //
 
 import Foundation
 
-struct Movie: Codable {
+class MovieDetail: Codable {
     
+    let audience: Int
+    let actor: String
+    let duration: Int
+    let director: String
+    let synopsis: String
+    let genre: String
     let grade: GradeType
-    let thumb: String
+    let image: String
     let reservationGrade: Int
     let title: String
     let reservationRate: Double
@@ -25,6 +31,8 @@ struct Movie: Codable {
         case reservationGrade = "reservation_grade"
         case reservationRate = "reservation_rate"
         case userRating = "user_rating"
-        case grade, thumb, title, date, id
+        case audience, actor, duration, director, synopsis, genre, grade,image, title, date, id
+    
     }
+
 }

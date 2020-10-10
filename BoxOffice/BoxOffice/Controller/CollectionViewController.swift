@@ -48,18 +48,8 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
         cell.ratingLabel.text = String(movie.userRating)
         cell.bookingRateLabel.text = "\(movie.reservationRate)%"
         cell.releaseDateLabel.text = movie.dateString
-        
-        switch movie.grade {
-        case 12:
-            cell.ageImageView.image = AgeLimitImage.twelveImage
-        case 15:
-            cell.ageImageView.image = AgeLimitImage.fifteenImage
-        case 19:
-            cell.ageImageView.image = AgeLimitImage.nineteenImage
-        default:
-            cell.ageImageView.image = AgeLimitImage.allAgeImage
-        }
-        
+        cell.ageImageView.image = movie.grade.getImage()
+    
         DispatchQueue.global().async {
             guard let imageURL: URL = URL(string: movie.thumb) else { preconditionFailure("thumbnail url 문제") }
             guard let imageData: Data = try? Data(contentsOf: imageURL) else { preconditionFailure("thumbnail image 불러오기 실패") }
@@ -97,6 +87,16 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
         return itemSpacing
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let detailViewController: DetailViewController = segue.destination as? DetailViewController,
+              let indexPath = self.collectionView.indexPathsForSelectedItems?[0] else {
+            return
+        }
+        let movie: Movie = myTabBarController.movies[indexPath.row]
+        detailViewController.movieId = movie.id
+        detailViewController.movieTitle = movie.title
+        let backBarButtonItem = UIBarButtonItem(title: "영화목록", style: .plain, target: self, action: nil)
+        myTabBarController.navigationItem.backBarButtonItem = backBarButtonItem
+    }
 }
 

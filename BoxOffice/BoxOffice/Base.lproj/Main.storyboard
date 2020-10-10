@@ -57,7 +57,7 @@
                                                                         </imageView>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mRd-7a-1Gx">
                                                                             <rect key="frame" x="160.5" y="0.0" width="149" height="47"/>
-                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </view>
                                                                     </subviews>
                                                                 </stackView>
@@ -103,7 +103,7 @@
                                                                         </label>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TZo-hl-vwm">
                                                                             <rect key="frame" x="257" y="0.0" width="52.5" height="47.5"/>
-                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </view>
                                                                     </subviews>
                                                                 </stackView>
@@ -124,7 +124,7 @@
                                                                         </label>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1A4-Rj-cx2">
                                                                             <rect key="frame" x="134.5" y="0.0" width="175" height="47"/>
-                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </view>
                                                                     </subviews>
                                                                 </stackView>
@@ -148,6 +148,7 @@
                                             <outlet property="releaseDateLable" destination="FL1-PS-nLw" id="F30-qg-a72"/>
                                             <outlet property="thumbImageView" destination="Dbm-up-aKv" id="Lib-3j-dwr"/>
                                             <outlet property="titleLable" destination="N3R-kr-Ht1" id="GBX-CU-Bkt"/>
+                                            <segue destination="6DA-GW-ayZ" kind="show" id="Vdo-MZ-dYM"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -277,6 +278,7 @@
                                             <outlet property="releaseDateLabel" destination="HHn-Lu-Fr0" id="3bb-DP-YwA"/>
                                             <outlet property="thumbImageView" destination="Gd0-eH-OV9" id="I1I-Sm-Ulx"/>
                                             <outlet property="titleLabel" destination="6fV-aE-r7Z" id="6In-gG-vYN"/>
+                                            <segue destination="6DA-GW-ayZ" kind="show" id="fFL-85-QWP"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -303,6 +305,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pFf-Gy-H0s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="822.99107142857144"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="pha-rv-eRb">
+            <objects>
+                <viewController id="6DA-GW-ayZ" customClass="DetailViewController" customModule="BoxOffice" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lKl-jd-3bm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w75-yV-CCD">
+                                <rect key="frame" x="210" y="403" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="bUw-NS-IN2" kind="show" id="E7A-7a-kzA"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="71b-0m-rXL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="AA8-YI-dlW"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RAe-LP-Hoo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2101" y="486"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="cki-y8-dRL">
+            <objects>
+                <viewController id="bUw-NS-IN2" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="psj-I6-lkE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="rHu-b8-9yb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="cgS-R2-oza"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Gm-Es-xYH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3122" y="478"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="UIs-od-CCp">
@@ -354,6 +398,9 @@
             <point key="canvasLocation" x="-862" y="468"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Vdo-MZ-dYM"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="dummyImage" width="99" height="141"/>
         <image name="ic_12" width="20" height="20"/>

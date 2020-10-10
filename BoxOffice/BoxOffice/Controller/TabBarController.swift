@@ -42,7 +42,7 @@ class TabBarController: UITabBarController {
     }
     
     @objc func touchUpOrderButton(_ sender: Any) {
-        self.present(OrderModal.alertController, animated: true, completion: nil)
+        self.present(Common.alertController, animated: true, completion: nil)
     }
     
 }

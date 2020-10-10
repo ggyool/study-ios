@@ -7,8 +7,8 @@
 
 import UIKit
 
-
-class OrderModal {
+// 공통적인 것을 처리하려면 좋은 방법이 있는지?
+class Common {
     static var alertController: UIAlertController = {
         let title: String = "정렬방식 선택"
         let message: String = "영화를 어떤 순서로 정렬할까요?"
@@ -35,5 +35,11 @@ class OrderModal {
         alertController.addAction(dateAlertAction)
         alertController.addAction(cancelAlertAction)
         return alertController
+    }()
+    
+    static var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
     }()
 }

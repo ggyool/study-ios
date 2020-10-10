@@ -50,18 +50,8 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell.rankingLable.text = String(movie.reservationGrade)
         cell.bookingRateLable.text = String(movie.reservationRate)
         cell.releaseDateLable.text = String(movie.dateString)
-
-        switch movie.grade {
-        case 12:
-            cell.ageImageView.image = AgeLimitImage.twelveImage
-        case 15:
-            cell.ageImageView.image = AgeLimitImage.fifteenImage
-        case 19:
-            cell.ageImageView.image = AgeLimitImage.nineteenImage
-        default:
-            cell.ageImageView.image = AgeLimitImage.allAgeImage
-        }
-
+        cell.ageImageView.image = movie.grade.getImage()
+    
         DispatchQueue.global().async {
             // url이 http라서 info.plist에 ATS추가하였음
             guard let imageURL: URL = URL(string: movie.thumb) else { preconditionFailure("thumbnail url 문제") }
@@ -84,6 +74,20 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UIScreen.main.bounds.height * 0.14
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let detailViewController: DetailViewController = segue.destination as? DetailViewController,
+              let indexPath = self.tableView.indexPathForSelectedRow else {
+            return
+        }
+        let movie: Movie = myTabBarController.movies[indexPath.row]
+        detailViewController.movieId = movie.id
+        detailViewController.movieTitle = movie.title
+        
+        // detail view controller 에서 back button 바꾸려면 까다롭다.
+        let backBarButtonItem = UIBarButtonItem(title: "영화목록", style: .plain, target: self, action: nil)
+        myTabBarController.navigationItem.backBarButtonItem = backBarButtonItem
     }
 }
 

@@ -9,12 +9,6 @@ import Foundation
 
 let DidReceiveMoviesNotification: Notification.Name = Notification.Name("DidReceiveMovies")
 
-let dateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd"
-    return formatter
-}()
-
 func requestMovies(_ orderType: OrderType = .reservationRate) {
     guard let url: URL = URL(string: "https://connect-boxoffice.run.goorm.io/movies?order_type=\(orderType.rawValue)") else {
         return
@@ -30,7 +24,7 @@ func requestMovies(_ orderType: OrderType = .reservationRate) {
         do{
             // String 으로 받아서 Movie에서는 Date로 받고 싶어서 이렇게 함
             let jsonDecoder: JSONDecoder = JSONDecoder()
-            jsonDecoder.dateDecodingStrategy = .formatted(dateFormatter)
+            jsonDecoder.dateDecodingStrategy = .formatted(Common.dateFormatter)
             let moviesResponse: MoviesGetResponseDto = try jsonDecoder.decode(MoviesGetResponseDto.self, from: data)
             // background thread에서 실행되고 있었으므로 넣었다.
             DispatchQueue.main.async {
