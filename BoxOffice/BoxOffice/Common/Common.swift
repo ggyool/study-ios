@@ -9,6 +9,11 @@ import UIKit
 
 // 공통적인 것을 처리하려면 좋은 방법이 있는지?
 class Common {
+    
+    static let fullStarImage: UIImage? = UIImage(named: "ic_star_large_full")
+    static let halfStarImage: UIImage? = UIImage(named: "ic_star_large_half")
+    static let emptyStarImage: UIImage? = UIImage(named: "ic_star_large")
+    
     static var alertController: UIAlertController = {
         let title: String = "정렬방식 선택"
         let message: String = "영화를 어떤 순서로 정렬할까요?"
@@ -42,4 +47,11 @@ class Common {
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
+    
+    static var numberFormatter: NumberFormatter = {
+        let formetter = NumberFormatter()
+        formetter.numberStyle = .decimal
+        return formetter
+    }()
+    
 }
