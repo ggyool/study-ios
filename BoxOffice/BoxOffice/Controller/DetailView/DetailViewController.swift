@@ -13,9 +13,13 @@ class DetailViewController: UIViewController {
     // 꼭 전달받아야 하는지 (navigation item title 때문에 전달 받았다.)
     var movieTitle: String!
     var movieDetail: MovieDetail!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var movieInfoView: UIView!
     @IBOutlet weak var synopsisView: UIView!
     @IBOutlet weak var synopsisHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var movieInfoHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var memberInfoHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,18 +31,26 @@ class DetailViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+//        print("first ", scrollView.contentSize)
+//        print("first movie info view ",movieInfoView.bounds.height)
+//        print("first synopsis view ",synopsisView.bounds.height)
+//        print("first content view ",contentView.bounds.height)
     }
     
     @objc func didReceiveMovieDetailNotification(_ notification: Notification) {
         guard let movieDetail: MovieDetail = notification.userInfo?["movieDetail"] as? MovieDetail else {
             return
         }
+        // movieDatail 읽어왔을 때
          
         guard let movieInfoViewController: MovieInfoViewController = children[0] as? MovieInfoViewController else { return }
         movieInfoViewController.reloadData(movieDetail: movieDetail)
         
         guard let synopsisViewController: SynopsisViewController = children[1] as? SynopsisViewController else { return }
         synopsisViewController.reloadDate(synopsis: movieDetail.synopsis)
+        
+        guard let memberInfoViewController: MemberInfoViewController = children[2] as? MemberInfoViewController else { return }
+        memberInfoViewController.reloadDate(actor: movieDetail.actor, director: movieDetail.director)
     }
     
     
@@ -50,7 +62,9 @@ class DetailViewController: UIViewController {
         if (container as? MovieInfoViewController) != nil {
             movieInfoHeightConstraint.constant = container.preferredContentSize.height
         }
-        
+        if (container as? MemberInfoViewController) != nil {
+            memberInfoHeightConstraint.constant = container.preferredContentSize.height
+        }
     }
 
 

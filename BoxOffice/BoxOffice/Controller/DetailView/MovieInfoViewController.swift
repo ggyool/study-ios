@@ -20,17 +20,12 @@ class MovieInfoViewController: UIViewController {
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var audienceLabel: UILabel!
     
-    @IBOutlet weak var starImageView_1: UIImageView!
-    @IBOutlet weak var starImageView_2: UIImageView!
-    @IBOutlet weak var starImageView_3: UIImageView!
-    @IBOutlet weak var starImageView_4: UIImageView!
-    @IBOutlet weak var starImageView_5: UIImageView!
     
-    var starImageViews: [UIImageView] = []
+    @IBOutlet var starImageViews: [UIImageView]!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.starImageViews = [starImageView_1, starImageView_2, starImageView_3,starImageView_4, starImageView_5]
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -40,7 +35,6 @@ class MovieInfoViewController: UIViewController {
     private func calculatePreferredSize() {
         let targetSize = CGSize(width: view.bounds.width, height: UIView.layoutFittingCompressedSize.height)
         preferredContentSize = view.systemLayoutSizeFitting(targetSize)
-        print(targetSize)
     }
     
     func reloadData(movieDetail: MovieDetail?){

@@ -57,16 +57,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             guard let imageURL: URL = URL(string: movie.thumb) else { preconditionFailure("thumbnail url 문제") }
             guard let imageData: Data = try? Data(contentsOf: imageURL) else { preconditionFailure("thumbnail image 불러오기 실패") }
             DispatchQueue.main.async {
-                // 재사용 관련 처리를 하지 않아도 될지
-                // 비동기로 인한 처리를 하지 않아도 될지
                 cell.thumbImageView.image = UIImage(data: imageData)
-//                if let index: IndexPath = tableView.indexPath(for: cell) {
-//                    if index.row == indexPath.row {
-//                        cell.imageView?.image = UIImage(data: imageData)
-//                        cell.setNeedsLayout() // 이것만 쓰면 다음 draw cycle에
-//                        cell.layoutIfNeeded() // 즉시 새로고침 하고 싶으면 씀
-//                    }
-//                }
             }
         }
         return cell

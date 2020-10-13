@@ -1,32 +1,30 @@
 //
-//  SynopsisViewController.swift
+//  MemberInfoViewController.swift
 //  BoxOffice
 //
-//  Created by ggyool on 2020/10/12.
+//  Created by ggyool on 2020/10/13.
 //
 
 import UIKit
 
-class SynopsisViewController: UIViewController {
+class MemberInfoViewController: UIViewController {
 
-    
-    @IBOutlet weak var synopsisLabel: UILabel!
+    @IBOutlet weak var directorLabel: UILabel!
+    @IBOutlet weak var actorLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    func reloadDate(synopsis: String) {
-        synopsisLabel.text = synopsis
+    func reloadDate(actor: String, director: String) {
+        directorLabel.text = director
+        actorLabel.text = actor
         calculatePreferredSize()
     }
-
+    
     private func calculatePreferredSize() {
-        // 414,0 이 나온다?
         let targetSize = CGSize(width: view.bounds.width, height: UIView.layoutFittingCompressedSize.height)
         preferredContentSize = view.systemLayoutSizeFitting(targetSize)
     }
-
-        
 
 }
