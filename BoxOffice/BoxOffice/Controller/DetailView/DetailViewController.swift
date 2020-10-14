@@ -17,9 +17,12 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var movieInfoView: UIView!
     @IBOutlet weak var synopsisView: UIView!
+    @IBOutlet weak var memberInfoView: UIView!
+    @IBOutlet weak var commentsView: UIView!
     @IBOutlet weak var synopsisHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var movieInfoHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var memberInfoHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var commentsHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +54,9 @@ class DetailViewController: UIViewController {
         
         guard let memberInfoViewController: MemberInfoViewController = children[2] as? MemberInfoViewController else { return }
         memberInfoViewController.reloadDate(actor: movieDetail.actor, director: movieDetail.director)
+        
+        guard let commentsViewController: CommentsViewController = children[3] as? CommentsViewController else { return }
+        commentsViewController.reloadData(movieId: movieDetail.id)
     }
     
     
@@ -65,6 +71,10 @@ class DetailViewController: UIViewController {
         if (container as? MemberInfoViewController) != nil {
             memberInfoHeightConstraint.constant = container.preferredContentSize.height
         }
+        if (container as? CommentsViewController) != nil {
+            commentsHeightConstraint.constant = container.preferredContentSize.height
+        }
+        print(container, container.preferredContentSize.height)
     }
 
 
