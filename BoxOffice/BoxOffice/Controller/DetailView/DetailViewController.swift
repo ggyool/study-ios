@@ -34,10 +34,6 @@ class DetailViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        print("first ", scrollView.contentSize)
-//        print("first movie info view ",movieInfoView.bounds.height)
-//        print("first synopsis view ",synopsisView.bounds.height)
-//        print("first content view ",contentView.bounds.height)
     }
     
     @objc func didReceiveMovieDetailNotification(_ notification: Notification) {
@@ -74,7 +70,6 @@ class DetailViewController: UIViewController {
         if (container as? CommentsViewController) != nil {
             commentsHeightConstraint.constant = container.preferredContentSize.height
         }
-        print(container, container.preferredContentSize.height)
     }
 
 

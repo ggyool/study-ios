@@ -14,7 +14,9 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.myTabBarController = self.parent as? TabBarController
+        self.myTabBarController = self.parent?.parent as? TabBarController
+        self.navigationItem.rightBarButtonItem?.target = self.myTabBarController
+        self.navigationItem.rightBarButtonItem?.action = #selector(self.myTabBarController.touchUpOrderButton(_:))
         configureRefreshController()
     }
     
@@ -33,6 +35,10 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         DispatchQueue.main.async {
             self.tableView.refreshControl?.endRefreshing()
         }
+    }
+    
+    func refreshNavigationItem(_ orderType: OrderType) {
+        self.navigationItem.title = orderType.getNavigationTitleString()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -48,6 +48,13 @@ class Common {
         return formatter
     }()
     
+    static var commentDateFormatter: DateFormatter = {
+        let formatter = DateFormatter();
+        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return formatter
+    }()
+    
     static var numberFormatter: NumberFormatter = {
         let formetter = NumberFormatter()
         formetter.numberStyle = .decimal

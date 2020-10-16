@@ -11,7 +11,7 @@ let DidReceiveCommentsNotification: Notification.Name = Notification.Name("DidRe
 
 
 func requestComments(movieId: String) {
-    guard let url: URL = URL(string: "https://connect-boxoffice.run.goorm.io/comments?id=" + movieId) else {
+    guard let url: URL = URL(string: "https://connect-boxoffice.run.goorm.io/comments?movie_id=" + movieId) else {
         return
     }
     let session: URLSession = URLSession(configuration: .default)

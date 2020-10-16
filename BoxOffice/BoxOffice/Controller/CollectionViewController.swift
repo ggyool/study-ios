@@ -15,7 +15,9 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.myTabBarController = self.parent as? TabBarController
+        self.myTabBarController = self.parent?.parent as? TabBarController
+        self.navigationItem.rightBarButtonItem?.target = self.myTabBarController
+        self.navigationItem.rightBarButtonItem?.action = #selector(self.myTabBarController.touchUpOrderButton(_:))
         configureRefreshController()
     }
     
@@ -30,6 +32,10 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
         DispatchQueue.main.async {
             self.collectionView.refreshControl?.endRefreshing()
         }
+    }
+    
+    func refreshNavigationItem(_ orderType: OrderType) {
+        self.navigationItem.title = orderType.getNavigationTitleString()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

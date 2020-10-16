@@ -61,6 +61,7 @@ class MovieInfoViewController: UIViewController {
         ratingLabel.text = "\(movieDetail.userRating)"
         audienceLabel.text = Common.numberFormatter.string(from: NSNumber(value: movieDetail.audience))
     }
+    
     func fillStars(_ roundedRating: Double) {
         let score: Int = Int(roundedRating)
         for i in 0..<(score/2) {

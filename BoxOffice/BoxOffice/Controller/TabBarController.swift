@@ -15,8 +15,6 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveMoviesNotification(_:)), name: DidReceiveMoviesNotification, object: nil)
-        self.navigationItem.rightBarButtonItem?.target = self
-        self.navigationItem.rightBarButtonItem?.action = #selector(touchUpOrderButton(_:))
         requestMovies(self.orderType)
     }
     
@@ -30,15 +28,21 @@ class TabBarController: UITabBarController {
         }
         self.orderType = orderType
         self.movies = movies
-        self.navigationItem.title = orderType.getNavigationTitleString()
-    
+
+        
+        print(self.navigationItem)
+        self.navigationController?.title = orderType.getNavigationTitleString()
+        
         // 뒤에 숨어있는 컨트롤러 relodDate를 해도 reload되지 않고 화면 전환시 reload 되는것을 확인한 후
         // 둘 다 새로고침 하면 좋을 것 같아서 이렇게 함
         // 처음 로드시 collectionView reload하면 nil 이라 에러가 난다. optional 사용했다.
-        let tableViewController: TableViewController = self.children[0] as! TableViewController
-        let collectionViewController: CollectionViewController = self.children[1] as! CollectionViewController
+        
+        let tableViewController: TableViewController = self.children[0].children[0] as! TableViewController
+        let collectionViewController: CollectionViewController = self.children[1].children[0] as! CollectionViewController
         tableViewController.tableView?.reloadData()
+        tableViewController.refreshNavigationItem(orderType)
         collectionViewController.collectionView?.reloadData()
+        collectionViewController.refreshNavigationItem(orderType)
     }
     
     @objc func touchUpOrderButton(_ sender: Any) {

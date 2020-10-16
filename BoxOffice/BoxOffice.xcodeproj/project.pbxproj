@@ -12,6 +12,7 @@
 		57502CEB253467F5002C8785 /* SynopsisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57502CEA253467F5002C8785 /* SynopsisViewController.swift */; };
 		5781E3662535B28E000A327E /* MemberInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5781E3652535B28E000A327E /* MemberInfoViewController.swift */; };
 		5781E3692535BA8C000A327E /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5781E3682535BA8C000A327E /* CommentsViewController.swift */; };
+		578327822539ADEC0075ABB1 /* CommentWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578327812539ADEC0075ABB1 /* CommentWriteViewController.swift */; };
 		57A66EF125333FD100609287 /* MovieInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A66EF025333FD100609287 /* MovieInfoViewController.swift */; };
 		57ABF70F252F1531005D686E /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ABF70E252F1531005D686E /* Common.swift */; };
 		57B2F6752528E45100B6707A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B2F6742528E45100B6707A /* AppDelegate.swift */; };
@@ -42,6 +43,7 @@
 		57502CEA253467F5002C8785 /* SynopsisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynopsisViewController.swift; sourceTree = "<group>"; };
 		5781E3652535B28E000A327E /* MemberInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInfoViewController.swift; sourceTree = "<group>"; };
 		5781E3682535BA8C000A327E /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		578327812539ADEC0075ABB1 /* CommentWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentWriteViewController.swift; sourceTree = "<group>"; };
 		57A66EF025333FD100609287 /* MovieInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoViewController.swift; sourceTree = "<group>"; };
 		57ABF70E252F1531005D686E /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		57B2F6712528E45100B6707A /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,6 +99,7 @@
 				57502CEA253467F5002C8785 /* SynopsisViewController.swift */,
 				5781E3652535B28E000A327E /* MemberInfoViewController.swift */,
 				5781E3682535BA8C000A327E /* CommentsViewController.swift */,
+				578327812539ADEC0075ABB1 /* CommentWriteViewController.swift */,
 			);
 			path = DetailView;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				57D35D022531BB74006330EA /* DetailViewController.swift in Sources */,
 				57D35D082531C5A0006330EA /* GradeType.swift in Sources */,
 				57C3622B2536FB6A004148AE /* CommentsRequest.swift in Sources */,
+				578327822539ADEC0075ABB1 /* CommentWriteViewController.swift in Sources */,
 				57D35D112531CCFF006330EA /* MovieDetailRequest.swift in Sources */,
 				57C362212536ED25004148AE /* CustomCommentsViewCell.swift in Sources */,
 			);
