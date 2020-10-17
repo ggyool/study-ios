@@ -12,9 +12,10 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var commentWriteButton: UIButton!
-
-    var comments: [Comment] = []
     
+    var comments: [Comment] = []
+    var movieTitle: String!
+    var movieGrade: GradeType!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +27,6 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        // 이곳에서 reload 끝난 후 실행
         if(self.tableView.contentSize.height > 0) {
             preferredContentSize =
                 CGSize(width: self.tableView.contentSize.width, height: self.tableView.contentSize.height + self.headerView.bounds.height)
@@ -34,8 +34,10 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     
-    func reloadData(movieId: String){
+    func reloadData(movieId: String, title: String, grade: GradeType){
         requestComments(movieId: movieId)
+        self.movieTitle = title
+        self.movieGrade = grade
     }
     
     @objc func didReceiveCommentsNotification(_ notification: Notification) {
@@ -77,5 +79,12 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
             cell.starImageViews[score/2].image = Common.halfStarImage
         }
     }
-    
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let commentWriteViewController: CommentWriteViewController = segue.destination as? CommentWriteViewController else {
+            return
+        }
+        commentWriteViewController.movieTitle = self.movieTitle
+        commentWriteViewController.movieGrade = self.movieGrade
+    }
 }

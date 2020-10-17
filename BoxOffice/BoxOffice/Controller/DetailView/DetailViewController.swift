@@ -52,7 +52,7 @@ class DetailViewController: UIViewController {
         memberInfoViewController.reloadDate(actor: movieDetail.actor, director: movieDetail.director)
         
         guard let commentsViewController: CommentsViewController = children[3] as? CommentsViewController else { return }
-        commentsViewController.reloadData(movieId: movieDetail.id)
+        commentsViewController.reloadData(movieId: movieDetail.id, title: movieDetail.title, grade: movieDetail.grade)
     }
     
     

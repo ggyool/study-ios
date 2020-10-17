@@ -11,3 +11,4 @@ import Foundation
 struct CommentsGetResponseDto: Codable {
     let comments: [Comment]
 }
+

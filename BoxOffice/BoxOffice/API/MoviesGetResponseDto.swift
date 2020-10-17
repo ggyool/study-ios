@@ -17,3 +17,6 @@ struct MoviesGetResponseDto: Codable {
         case orderType = "order_type"
     }
 }
+
+
+
