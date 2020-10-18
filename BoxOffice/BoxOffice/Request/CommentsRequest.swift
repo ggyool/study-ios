@@ -9,7 +9,6 @@ import Foundation
 
 let DidReceiveCommentsNotification: Notification.Name = Notification.Name("DidReceiveComments")
 
-
 func requestComments(movieId: String) {
     guard let url: URL = URL(string: "https://connect-boxoffice.run.goorm.io/comments?movie_id=" + movieId) else {
         return

@@ -14,6 +14,8 @@
 		5781E3692535BA8C000A327E /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5781E3682535BA8C000A327E /* CommentsViewController.swift */; };
 		578327822539ADEC0075ABB1 /* CommentWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578327812539ADEC0075ABB1 /* CommentWriteViewController.swift */; };
 		578327852539B43B0075ABB1 /* CommentPostRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578327842539B43B0075ABB1 /* CommentPostRequestDto.swift */; };
+		5793EC4F253C803100A9E38D /* CommentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793EC4E253C803100A9E38D /* CommentRequest.swift */; };
+		5793EC52253C8A4800A9E38D /* CommentPostResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793EC51253C8A4800A9E38D /* CommentPostResponseDto.swift */; };
 		57A66EF125333FD100609287 /* MovieInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A66EF025333FD100609287 /* MovieInfoViewController.swift */; };
 		57ABF70F252F1531005D686E /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ABF70E252F1531005D686E /* Common.swift */; };
 		57B2F6752528E45100B6707A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B2F6742528E45100B6707A /* AppDelegate.swift */; };
@@ -46,6 +48,8 @@
 		5781E3682535BA8C000A327E /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		578327812539ADEC0075ABB1 /* CommentWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentWriteViewController.swift; sourceTree = "<group>"; };
 		578327842539B43B0075ABB1 /* CommentPostRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentPostRequestDto.swift; sourceTree = "<group>"; };
+		5793EC4E253C803100A9E38D /* CommentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRequest.swift; sourceTree = "<group>"; };
+		5793EC51253C8A4800A9E38D /* CommentPostResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentPostResponseDto.swift; sourceTree = "<group>"; };
 		57A66EF025333FD100609287 /* MovieInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoViewController.swift; sourceTree = "<group>"; };
 		57ABF70E252F1531005D686E /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		57B2F6712528E45100B6707A /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +93,7 @@
 				574EF424252C56340055DC08 /* MoviesRequest.swift */,
 				57D35D102531CCFF006330EA /* MovieDetailRequest.swift */,
 				57C3622A2536FB6A004148AE /* CommentsRequest.swift */,
+				5793EC4E253C803100A9E38D /* CommentRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -188,6 +193,7 @@
 				57BDE433252B724300A5F85A /* MoviesGetResponseDto.swift */,
 				57C3622D2536FC53004148AE /* CommentsGetResponseDto.swift */,
 				578327842539B43B0075ABB1 /* CommentPostRequestDto.swift */,
+				5793EC51253C8A4800A9E38D /* CommentPostResponseDto.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -268,6 +274,7 @@
 				578327852539B43B0075ABB1 /* CommentPostRequestDto.swift in Sources */,
 				57B2F6792528E45100B6707A /* CollectionViewController.swift in Sources */,
 				57BDE434252B724300A5F85A /* MoviesGetResponseDto.swift in Sources */,
+				5793EC52253C8A4800A9E38D /* CommentPostResponseDto.swift in Sources */,
 				57D35CFF2531AEBD006330EA /* CustomCollectionViewCell.swift in Sources */,
 				57ABF70F252F1531005D686E /* Common.swift in Sources */,
 				574EF425252C56340055DC08 /* MoviesRequest.swift in Sources */,
@@ -280,6 +287,7 @@
 				57B2F6772528E45100B6707A /* SceneDelegate.swift in Sources */,
 				57C7218F25308431009DE68F /* TabBarController.swift in Sources */,
 				57A66EF125333FD100609287 /* MovieInfoViewController.swift in Sources */,
+				5793EC4F253C803100A9E38D /* CommentRequest.swift in Sources */,
 				57D35D052531C2D0006330EA /* MovieDetail.swift in Sources */,
 				57B2F68C2528E63700B6707A /* TableViewController.swift in Sources */,
 				57D35D022531BB74006330EA /* DetailViewController.swift in Sources */,

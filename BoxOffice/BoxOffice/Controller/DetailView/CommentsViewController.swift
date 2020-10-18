@@ -14,9 +14,10 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var commentWriteButton: UIButton!
     
     var comments: [Comment] = []
+    var movieId: String!
     var movieTitle: String!
     var movieGrade: GradeType!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveCommentsNotification(_:)), name: DidReceiveCommentsNotification, object: nil)
@@ -36,19 +37,17 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func reloadData(movieId: String, title: String, grade: GradeType){
         requestComments(movieId: movieId)
+        self.movieId = movieId
         self.movieTitle = title
         self.movieGrade = grade
+        
     }
     
     @objc func didReceiveCommentsNotification(_ notification: Notification) {
         guard let comments: [Comment] = notification.userInfo?["comments"] as? [Comment] else {
             return
         }
-        self.comments += comments
-//        self.comments += comments
-//        self.comments += comments
-//        self.comments += comments
-//        self.comments += comments
+        self.comments = comments
         self.tableView.reloadData()
     }
     
@@ -84,6 +83,7 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         guard let commentWriteViewController: CommentWriteViewController = segue.destination as? CommentWriteViewController else {
             return
         }
+        commentWriteViewController.movieId = self.movieId
         commentWriteViewController.movieTitle = self.movieTitle
         commentWriteViewController.movieGrade = self.movieGrade
     }
