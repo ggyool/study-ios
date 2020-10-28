@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MapKitExam" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="X5X-GO-bsk">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JcM-Yh-KwG">
+                                <rect key="frame" x="360" y="48" width="24" height="23"/>
+                                <state key="normal" image="scope" catalog="system"/>
+                                <connections>
+                                    <action selector="touchUpMyLocationButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gm3-r5-Pa8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UfR-f3-tyQ">
+                                <rect key="frame" x="330" y="48" width="20" height="22"/>
+                                <state key="normal" image="magnifyingglass" catalog="system"/>
+                                <connections>
+                                    <action selector="touchUpSearchButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gYf-ew-7aa"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="X5X-GO-bsk" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="38D-0W-iSz"/>
+                            <constraint firstItem="JcM-Yh-KwG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="4" id="7BO-6V-xOA"/>
+                            <constraint firstItem="X5X-GO-bsk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ImJ-1M-Anm"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JcM-Yh-KwG" secondAttribute="trailing" constant="30" id="Ot6-wm-bS0"/>
+                            <constraint firstItem="JcM-Yh-KwG" firstAttribute="leading" secondItem="UfR-f3-tyQ" secondAttribute="trailing" constant="10" id="adt-GY-sMW"/>
+                            <constraint firstAttribute="bottom" secondItem="X5X-GO-bsk" secondAttribute="bottom" id="c2c-Pg-C6j"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="X5X-GO-bsk" secondAttribute="trailing" id="jzc-He-4ye"/>
+                            <constraint firstItem="UfR-f3-tyQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="4" id="vvH-vc-nCg"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="X5X-GO-bsk" id="ffO-Ha-aK5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="114"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="scope" catalog="system" width="128" height="122"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
